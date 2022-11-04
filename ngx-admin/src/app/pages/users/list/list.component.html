@@ -1,0 +1,22 @@
+<div class="container">
+    <table class="table">
+       <thead>
+            <tr>
+                <th *ngFor="let column of columns" scope="col">
+                    {{column}}
+
+                </th>
+            </tr>
+       </thead> 
+       <tbody>
+            <tr *ngFor="let user of users" scope="col">
+                <td>{{user.id}}</td>
+                <td>{{user.name}}</td>
+                <td>{{user.email}}</td>
+
+            </tr>
+
+       </tbody>
+        
+    </table>
+</div>
