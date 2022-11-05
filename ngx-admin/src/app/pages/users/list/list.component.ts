@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from '../../../models/user.model';
+import { User } from '../../../models/users/user.model';
+import { UserService } from '../../../services/user.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'ngx-list',
@@ -7,38 +9,54 @@ import { User } from '../../../models/user.model';
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent implements OnInit {
-  columns:string[] = ["Id","Name","Email"]
-  users:User[]=[
-    {
-      id: 1,
-      name: 'John Doe',
-      email: 'john@gmail.com',
-      password: '1234'
-    },
-    {
-      id: 1,
-      name: 'Pepe Doe',
-      email: 'john3@gmail.com',
-      password: 'pepe'
-    },
-    {
-      id: 1,
-      name: 'Charles Doe',
-      email: 'john2@gmail.com',
-      password: '12345'
-    }
-  ]
+  columns:string[] = ["Id","Name","Email", "Rol", "Options"]
+  users:User[];
 
-  constructor() { }
+  constructor(private svcUsers: UserService) { }
 
   ngOnInit(): void {
     this.listUsers();
   }
 
   listUsers(): void {
-    this.users.forEach(user => {
-      console.log(user.name);
+    this.svcUsers.index().subscribe(users =>{
+      console.log(users);
+      this.users = users;
     });
+  }
+
+  deleteUser(id:string):void{
+    Swal.fire({
+      title: 'Eliminar usuario',
+      text: "Está seguro que quiere eliminar el usuario?",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, eliminar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.svcUsers.destroy(id).
+          subscribe(data => {
+            Swal.fire(
+              'Eliminado!',
+              'El usuario ha sido eliminada correctamente',
+              'success'
+            )
+            this.ngOnInit();
+          });
+      }
+    })
+  }
+
+
+  editUser(id:number): void {
+    // Falta implementar :v
+    // console.log("Editando a: ", id);
+    // this.svcUsers.destroy(id).subscribe(users =>{
+    //   console.log(users);
+    //   this.users = users;
+    // });
   }
 
 }
