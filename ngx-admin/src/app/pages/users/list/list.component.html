@@ -13,7 +13,11 @@
                 <td>{{user.id}}</td>
                 <td>{{user.name}}</td>
                 <td>{{user.email}}</td>
-
+                <td>{{user.role?.name}}</td>
+                <td>
+                    <button class="btn btn-warning" (click)="updateUser(user.id)">Edit</button>
+                    <button class="btn btn-danger" (click)="deleteUser(user.id)">Delete</button> 
+                </td>
             </tr>
 
        </tbody>
