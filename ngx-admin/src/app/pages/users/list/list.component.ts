@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { User } from '../../../models/users/user.model';
 import { UserService } from '../../../services/users/user.service';
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'ngx-list',
@@ -12,7 +13,7 @@ export class ListComponent implements OnInit {
   columns:string[] = ["Id","Name","Email", "Rol", "Options"]
   users:User[];
 
-  constructor(private svcUsers: UserService) { }
+  constructor(private svcUsers: UserService, private router:Router) { }
 
   ngOnInit(): void {
     this.listUsers();
@@ -50,13 +51,18 @@ export class ListComponent implements OnInit {
   }
 
 
-  editUser(id:number): void {
+  updateUser(id:number): void {
     // Falta implementar :v
     // console.log("Editando a: ", id);
     // this.svcUsers.destroy(id).subscribe(users =>{
     //   console.log(users);
     //   this.users = users;
     // });
+    this.router.navigate([`pages/users/update/${id}`]);
+  }
+
+  createUser():void{
+    this.router.navigate(["/pages/users/create"]);
   }
 
 }

@@ -1,4 +1,6 @@
 <div class="container">
+    <h1>Users</h1>
+    <button class="btn btn-primary" (click)="createUser()">Create</button> 
     <table class="table">
        <thead>
             <tr>
@@ -17,6 +19,7 @@
                 <td>
                     <button class="btn btn-warning" (click)="updateUser(user.id)">Edit</button>
                     <button class="btn btn-danger" (click)="deleteUser(user.id)">Delete</button> 
+                    
                 </td>
             </tr>
 

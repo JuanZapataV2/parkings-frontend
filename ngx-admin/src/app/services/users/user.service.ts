@@ -17,4 +17,14 @@ export class UserService {
   destroy(id: string) {
     return this.http.delete<User>(`${environment.url_backend}/users/${id}`);
   }
+  create(user:User):any{
+    return this.http.post(`${environment.url_backend}/register`, user);
+  }
+  update(user:User):any{
+    return this.http.put(`${environment.url_backend}/users/${user.id}`, user);
+  }
+
+  show(id:number):Observable<User>{
+    return this.http.get<User>(`${environment.url_backend}/users/${id}`);
+  }
 }
