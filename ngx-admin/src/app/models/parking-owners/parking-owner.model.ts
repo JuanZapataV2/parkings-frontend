@@ -1,4 +1,4 @@
-import { User } from "../user.model"
+import { User } from "../users/user.model"
 
 export class ParkingOwner {
   id?:number
