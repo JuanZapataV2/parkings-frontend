@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { UserService } from '../../../services/users/user.service';
-import { User } from '../../../models/users/user.model';
-import { ActivatedRoute, Router } from '@angular/router';
-import Swal from 'sweetalert2';
+import { Component, OnInit } from "@angular/core";
+import { UserService } from "../../../services/users/user.service";
+import { User } from "../../../models/users/user.model";
+import { ActivatedRoute, Router } from "@angular/router";
+import Swal from "sweetalert2";
 
 @Component({
   selector: "ngx-create",
@@ -37,28 +37,43 @@ export class CreateComponent implements OnInit {
   }
 
   create(): void {
-    //if (this.validarDatosCompletos()) {
-    this.sendAttempt = true;
-    this.userSvc.create(this.user).subscribe((data) => {
-      Swal.fire("Creado", "El usuario ha sido creado correctamente", "success");
-      this.router.navigate(["pages/users/list"]);
-    });
-    //}
+    if (this.validateData()) {
+      this.sendAttempt = true;
+      this.userSvc.create(this.user).subscribe((data) => {
+        Swal.fire(
+          "Creado",
+          "El usuario ha sido creado correctamente",
+          "success"
+        );
+        this.router.navigate(["pages/users/list"]);
+      });
+    } else {
+      Swal.fire(
+        "Error",
+        "Todos los campos deben ser llenados",
+        "warning"
+      );
+
+    }
   }
 
   update(): void {
-    //if (this.validarDatosCompletos()) {
-      this.userSvc
-        .update(this.user)
-        .subscribe((data) => {
-          Swal.fire(
-            "Actualizado",
-            "El usuario ha sido actualizado correctamente",
-            "success"
-          );
-          this.router.navigate(["pages/users/list"]);
-        });
-    //}
+    if (this.validateData()) {
+      this.userSvc.update(this.user).subscribe((data) => {
+        Swal.fire(
+          "Actualizado",
+          "El usuario ha sido actualizado correctamente",
+          "success"
+        );
+        this.router.navigate(["pages/users/list"]);
+      });
+    } else {
+      Swal.fire(
+        "Error",
+        "Todos los campos deben ser llenados",
+        "warning"
+      );
+    }
   }
 
   getUser(id: number) {
@@ -66,5 +81,18 @@ export class CreateComponent implements OnInit {
     this.userSvc.show(id).subscribe((data) => {
       this.user = data[0];
     });
+  }
+
+  validateData(): boolean {
+    this.sendAttempt = true;
+    if (
+      this.user.name == "" ||
+      this.user.email == "" ||
+      this.user.password == ""
+    ) {
+      return false;
+    } else {
+      return true;
+    }
   }
 }

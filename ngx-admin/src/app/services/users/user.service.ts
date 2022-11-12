@@ -14,7 +14,7 @@ export class UserService {
   index(): Observable<User[]> {
     return this.http.get<User[]>(`${environment.url_backend}/users`);
   }
-  destroy(id: string) {
+  destroy(id: number) {
     return this.http.delete<User>(`${environment.url_backend}/users/${id}`);
   }
   create(user:User):any{

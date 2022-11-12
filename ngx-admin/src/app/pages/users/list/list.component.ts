@@ -13,20 +13,20 @@ export class ListComponent implements OnInit {
   columns:string[] = ["Id","Name","Email", "Rol", "Options"]
   users:User[];
 
-  constructor(private svcUsers: UserService, private router:Router) { }
+
+  constructor(private userSvc: UserService, private router:Router) { }
 
   ngOnInit(): void {
     this.listUsers();
   }
 
   listUsers(): void {
-    this.svcUsers.index().subscribe(users =>{
-      console.log(users);
+    this.userSvc.index().subscribe(users =>{
       this.users = users;
     });
   }
 
-  deleteUser(id:string):void{
+  deleteUser(id:number):void{
     Swal.fire({
       title: 'Eliminar usuario',
       text: "Está seguro que quiere eliminar el usuario?",
@@ -37,7 +37,7 @@ export class ListComponent implements OnInit {
       confirmButtonText: 'Si, eliminar'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.svcUsers.destroy(id).
+        this.userSvc.destroy(id).
           subscribe(data => {
             Swal.fire(
               'Eliminado!',
@@ -54,7 +54,7 @@ export class ListComponent implements OnInit {
   updateUser(id:number): void {
     // Falta implementar :v
     // console.log("Editando a: ", id);
-    // this.svcUsers.destroy(id).subscribe(users =>{
+    // this.userSvc.destroy(id).subscribe(users =>{
     //   console.log(users);
     //   this.users = users;
     // });
@@ -64,5 +64,6 @@ export class ListComponent implements OnInit {
   createUser():void{
     this.router.navigate(["/pages/users/create"]);
   }
+
 
 }
