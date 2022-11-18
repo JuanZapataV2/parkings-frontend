@@ -15,7 +15,7 @@ export class ReservationService {
     return this.http.get<Reservation[]>(`${environment.url_backend}/reservation`);
   }
 
-  show(id: string): Observable<Reservation> {
+  show(id: number): Observable<Reservation> {
     return this.http.get<Reservation[]>(`${environment.url_backend}/reservation/${id}`);
   }
 
@@ -28,7 +28,7 @@ export class ReservationService {
     return this.http.put(`${environment.url_backend}/reservation/${reservation.id}`, reservation)
   }
 
-  destroy(id: string) {
+  destroy(id: number) {
     return this.http.delete<Reservation>(`${environment.url_backend}/reservation/${id}`);
   }
 }

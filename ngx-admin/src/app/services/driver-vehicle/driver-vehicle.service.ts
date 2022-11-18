@@ -15,7 +15,7 @@ export class DriverVehicleService {
     return this.http.get<DriverVehicle[]>(`${environment.url_backend}/driver-vehicles`);
   }
 
-  show(id: string): Observable<DriverVehicle> {
+  show(id: number): Observable<DriverVehicle> {
     return this.http.get<DriverVehicle[]>(`${environment.url_backend}/driver-vehicles/${id}`);
   }
 
@@ -28,7 +28,7 @@ export class DriverVehicleService {
     return this.http.put(`${environment.url_backend}/driver-vehicles/${driverVehicle.id}`, driverVehicle)
   }
 
-  destroy(id: string) {
+  destroy(id: number) {
     return this.http.delete<DriverVehicle>(`${environment.url_backend}/driver-vehicles/${id}`);
   }
 }

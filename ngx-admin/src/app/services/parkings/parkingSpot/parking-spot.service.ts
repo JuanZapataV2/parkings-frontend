@@ -15,7 +15,7 @@ export class ParkingSpotService {
     return this.http.get<ParkingSpot[]>(`${environment.url_backend}/parkingSpot`);
   }
 
-  show(id: string): Observable<ParkingSpot> {
+  show(id: number): Observable<ParkingSpot> {
     return this.http.get<ParkingSpot[]>(`${environment.url_backend}/parkingSpot/${id}`);
   }
 
@@ -28,7 +28,7 @@ export class ParkingSpotService {
     return this.http.put(`${environment.url_backend}/parkingSpot/${parkingSpot.id}`, parkingSpot)
   }
 
-  destroy(id: string) {
+  destroy(id: number) {
     return this.http.delete<ParkingSpot>(`${environment.url_backend}/parkingSpot/${id}`);
   }
 }

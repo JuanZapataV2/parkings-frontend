@@ -1,0 +1,34 @@
+<div class="container">
+  <h1>Parkings</h1>
+  <button class="btn btn-primary" (click)="createParking()">Create</button>
+  <table class="table">
+     <thead>
+          <tr>
+              <th *ngFor="let column of columns" scope="col">
+                  {{column}}
+
+              </th>
+          </tr>
+     </thead>
+     <tbody>
+          <tr *ngFor="let parking of parkings" scope="col">
+              <td>{{parking.id}}</td>
+              <td>{{parking.owner_id}}</td>
+              <td>{{parking.name}}</td>
+              <td>{{parking.address}}</td>
+              <td>{{parking.telephone}}</td>
+              <td>{{parking.number_spaces}}</td>
+              <td>{{parking.open_hours}}</td>
+              <td>{{parking.parking_owner.name}}</td>
+
+              <td>
+                  <button class="btn btn-warning" (click)="updateParking(parking.id)">Edit</button>
+                  <button class="btn btn-danger" (click)="deleteParking(parking.id)">Delete</button>
+
+              </td>
+          </tr>
+
+     </tbody>
+
+  </table>
+</div>

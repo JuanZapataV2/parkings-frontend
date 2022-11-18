@@ -1,0 +1,61 @@
+<div class="container">
+  <div class="row">
+      <h1 *ngIf="createMode">Create parking</h1>
+      <h1 *ngIf="!createMode">Edit parking</h1>
+  </div>
+  <div class="row">
+      <div class="col-3">
+          <label>Owner</label>
+      </div>
+      <div class="col-9">
+        <select formControlName="country">
+          <option [ngValue]="null" disabled>Select Owner</option>
+          <option *ngFor="let owner of parkingOwners" [ngValue]="owner.id">{{owner.id}}</option>
+        </select>
+      </div>
+  </div>
+  <div class="row">
+    <div class="col-3">
+        <label>Name</label>
+    </div>
+    <div class="col-9">
+        <input type="text" class="form-control" [(ngModel)]="user.name"/>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-3">
+        <label>Addres</label>
+    </div>
+    <div class="col-9">
+        <input type="text" class="form-control" [(ngModel)]="user.address"/>
+    </div>
+</div>
+<div class="row">
+  <div class="col-3">
+      <label>Telephone</label>
+  </div>
+  <div class="col-9">
+      <input type="number" class="form-control" [(ngModel)]="user.telephone"/>
+  </div>
+</div>
+<div class="row">
+  <div class="col-3">
+      <label>Number of Spaces</label>
+  </div>
+  <div class="col-9">
+      <input type="number" class="form-control" [(ngModel)]="user.number_spaces"/>
+  </div>
+</div>
+<div class="row">
+  <div class="col-3">
+      <label>Open Hours</label>
+  </div>
+  <div class="col-9">
+      <input type="text" class="form-control" [(ngModel)]="user.open_hours"/>
+  </div>
+</div>
+  <div class="row">
+      <button *ngIf="createMode" class="btn btn-primary btn-block" (click)="create()">Crear</button>
+      <button *ngIf="!createMode" class="btn btn-primary btn-block" (click)="update()">Editar</button>
+  </div>
+</div>
