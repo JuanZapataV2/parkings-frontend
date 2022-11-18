@@ -89,11 +89,6 @@ const routes: Routes = [{
       path: '**',
       component: NotFoundComponent,
     },
-    {
-      path: 'parkings',
-      loadChildren: () => import('./parkings/parkings.module')
-        .then(m => m.ParkingsModule),
-    },
   ],
 }];
 

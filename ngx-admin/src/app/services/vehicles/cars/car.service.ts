@@ -15,7 +15,7 @@ export class CarService {
     return this.http.get<Car[]>(`${environment.url_backend}/vehicles_car`);
   }
 
-  show(id: number): Observable<Car> {
+  show(id: string): Observable<Car> {
     return this.http.get<Car[]>(`${environment.url_backend}/vehicles/car/${id}`);
   }
 
@@ -28,7 +28,7 @@ export class CarService {
     return this.http.put(`${environment.url_backend}/car/${car.id}`, car)
   }
 
-  destroy(id: number) {
+  destroy(id: string) {
     return this.http.delete<Car>(`${environment.url_backend}/vehicles/car/${id}`);
   }
 }

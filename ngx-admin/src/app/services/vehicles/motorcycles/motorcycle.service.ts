@@ -15,7 +15,7 @@ export class MotorcycleService {
     return this.http.get<Motorcycle[]>(`${environment.url_backend}/vehicles_motorcycle`);
   }
 
-  show(id: number): Observable<Motorcycle> {
+  show(id: string): Observable<Motorcycle> {
     return this.http.get<Motorcycle[]>(`${environment.url_backend}/vehicles/motorcycle/${id}`);
   }
 
@@ -28,7 +28,7 @@ export class MotorcycleService {
     return this.http.put(`${environment.url_backend}/motorcycle/${motorcycle.id}`, motorcycle)
   }
 
-  destroy(id: number) {
+  destroy(id: string) {
     return this.http.delete<Motorcycle>(`${environment.url_backend}/vehicles/motorcycle/${id}`);
   }
 }

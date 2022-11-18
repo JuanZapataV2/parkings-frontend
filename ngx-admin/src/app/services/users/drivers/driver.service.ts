@@ -15,7 +15,7 @@ export class DriverService {
     return this.http.get<Driver[]>(`${environment.url_backend}/users_owner`);
   }
 
-  show(id: number): Observable<Driver> {
+  show(id: string): Observable<Driver> {
     return this.http.get<Driver[]>(`${environment.url_backend}/users/drivers/${id}`);
   }
 
@@ -28,7 +28,7 @@ export class DriverService {
     return this.http.put(`${environment.url_backend}/driver/${driver.id}`, driver)
   }
 
-  destroy(id: number) {
+  destroy(id: string) {
     return this.http.delete<Driver>(`${environment.url_backend}/users/drivers/${id}`);
   }
 }

@@ -15,7 +15,7 @@ export class RoleService {
     return this.http.get<Role[]>(`${environment.url_backend}/roles`);
   }
 
-  show(id: number): Observable<Role> {
+  show(id: string): Observable<Role> {
     return this.http.get<Role[]>(`${environment.url_backend}/roles/${id}`);
   }
 
@@ -28,7 +28,7 @@ export class RoleService {
     return this.http.put(`${environment.url_backend}/rol/${rol.id}`, rol)
   }
 
-  destroy(id: number) {
+  destroy(id: string) {
     return this.http.delete<Role>(`${environment.url_backend}/roles/${id}`);
   }
 

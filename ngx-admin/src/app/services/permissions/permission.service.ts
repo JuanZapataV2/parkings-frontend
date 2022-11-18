@@ -15,7 +15,7 @@ export class PermissionService {
     return this.http.get<Permission[]>(`${environment.url_backend}/permission`);
   }
 
-  show(id: number): Observable<Permission> {
+  show(id: string): Observable<Permission> {
     return this.http.get<Permission[]>(`${environment.url_backend}/permission/${id}`);
   }
 
@@ -28,7 +28,7 @@ export class PermissionService {
     return this.http.put(`${environment.url_backend}/permission/${permission.id}`, permission)
   }
 
-  destroy(id: number) {
+  destroy(id: string) {
     return this.http.delete<Permission>(`${environment.url_backend}/permission/${id}`);
   }
 

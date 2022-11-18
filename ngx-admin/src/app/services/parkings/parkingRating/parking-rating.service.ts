@@ -15,7 +15,7 @@ export class ParkingRatingService {
     return this.http.get<ParkingRating[]>(`${environment.url_backend}/parkingRating`);
   }
 
-  show(id: number): Observable<ParkingRating> {
+  show(id: string): Observable<ParkingRating> {
     return this.http.get<ParkingRating[]>(`${environment.url_backend}/parkingRating/${id}`);
   }
 
@@ -28,7 +28,7 @@ export class ParkingRatingService {
     return this.http.put(`${environment.url_backend}/parkingRating/${parkingRating.id}`, parkingRating)
   }
 
-  destroy(id: number) {
+  destroy(id: string) {
     return this.http.delete<ParkingRating>(`${environment.url_backend}/parkingRating/${id}`);
   }
 
