@@ -7,6 +7,7 @@ import { ECommerceComponent } from './e-commerce/e-commerce.component';
 import { NotFoundComponent } from './miscellaneous/not-found/not-found.component';
 import { UsersModule } from './users/users.module';
 import { RolesModule } from './roles/roles.module';
+import { SecurityModule } from './security/security.module';
 
 const routes: Routes = [{
   path: '',
@@ -24,6 +25,11 @@ const routes: Routes = [{
       path: 'users',
       loadChildren: () => import('./users/users.module')
         .then(m => m.UsersModule),
+    },
+    {
+      path: 'security',
+      loadChildren: () => import('./security/security.module')
+        .then(m => m.SecurityModule),
     },
     {
       path: 'roles',
