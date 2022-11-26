@@ -16,7 +16,7 @@ export class RoleService {
   }
 
   show(id: string): Observable<Role> {
-    return this.http.get<Role[]>(`${environment.url_backend}/roles/${id}`);
+    return this.http.get<Role>(`${environment.url_backend}/roles/${id}`);
   }
 
   create(rol:Role): any{

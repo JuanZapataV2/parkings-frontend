@@ -57,9 +57,13 @@ export class SecurityService {
  */
  guardarDatosSesion(datosSesion: any) {
   let token = datosSesion.token.token;
+  //console.log("La sesion ",datosSesion.token);
   let sesionActual = localStorage.getItem('sesion');
    let data: User = {
     id: datosSesion.User.id,
+    name: datosSesion.User.name,
+    role: datosSesion.User.role,
+    email: datosSesion.User.email,
     token:token,
    };
    localStorage.setItem('sesion', JSON.stringify(data));

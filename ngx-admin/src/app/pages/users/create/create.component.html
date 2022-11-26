@@ -11,6 +11,7 @@
             <input type="text" class="form-control" [(ngModel)]="user.name"/>
         </div>
     </div>
+    <br>
     <div class="row">
         <div class="col-3">
             <label>Email</label>
@@ -19,13 +20,26 @@
             <input type="text" class="form-control" [(ngModel)]="user.email"/>
         </div>
     </div>
-
+    <br>
     <div class="row">
         <div class="col-3">
             <label>Password</label>
         </div>
         <div class="col-9">
             <input type="password" class="form-control" [(ngModel)]="user.password"/>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-3">
+            <label>Role</label>
+        </div>
+        <div class="col-9">
+            <select class="form-control" [(ngModel)]="idRoleSelected">
+                <option *ngFor="let role of roles" [value] ="role.id" selected>
+                    {{role.name}}
+                </option>
+            </select>
         </div>
     </div>
     <div class="row">
