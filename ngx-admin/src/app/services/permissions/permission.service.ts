@@ -15,8 +15,8 @@ export class PermissionService {
     return this.http.get<Permission[]>(`${environment.url_backend}/permission`);
   }
 
-  show(id: string): Observable<Permission> {
-    return this.http.get<Permission[]>(`${environment.url_backend}/permission/${id}`);
+  show(id: number): Observable<Permission> {
+    return this.http.get<Permission>(`${environment.url_backend}/permission/${id}`);
   }
 
   create(permission:Permission): any{

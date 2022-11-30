@@ -15,8 +15,8 @@ export class ReservationService {
     return this.http.get<Reservation[]>(`${environment.url_backend}/reservation`);
   }
 
-  show(id: string): Observable<Reservation> {
-    return this.http.get<Reservation[]>(`${environment.url_backend}/reservation/${id}`);
+  show(id: number): Observable<Reservation> {
+    return this.http.get<Reservation>(`${environment.url_backend}/reservation/${id}`);
   }
 
   create(reservation:Reservation): any{

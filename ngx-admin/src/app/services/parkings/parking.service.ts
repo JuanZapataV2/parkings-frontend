@@ -15,8 +15,8 @@ export class ParkingService {
     return this.http.get<Parking[]>(`${environment.url_backend}/parking`);
   }
 
-  show(id: string): Observable<Parking> {
-    return this.http.get<Parking[]>(`${environment.url_backend}/parking/${id}`);
+  show(id: number): Observable<Parking> {
+    return this.http.get<Parking>(`${environment.url_backend}/parking/${id}`);
   }
 
   create(parking:Parking): any{

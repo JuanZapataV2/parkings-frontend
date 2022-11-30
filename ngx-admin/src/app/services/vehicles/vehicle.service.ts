@@ -15,8 +15,8 @@ export class VehicleService {
     return this.http.get<Vehicle[]>(`${environment.url_backend}/vehicles`);
   }
 
-  show(id: string): Observable<Vehicle> {
-    return this.http.get<Vehicle[]>(`${environment.url_backend}/vehicles/${id}`);
+  show(id: number): Observable<Vehicle> {
+    return this.http.get<Vehicle>(`${environment.url_backend}/vehicles/${id}`);
   }
 
   create(vehicle:Vehicle): any{

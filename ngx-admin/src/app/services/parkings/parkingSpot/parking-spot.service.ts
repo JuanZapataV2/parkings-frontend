@@ -15,8 +15,8 @@ export class ParkingSpotService {
     return this.http.get<ParkingSpot[]>(`${environment.url_backend}/parkingSpot`);
   }
 
-  show(id: string): Observable<ParkingSpot> {
-    return this.http.get<ParkingSpot[]>(`${environment.url_backend}/parkingSpot/${id}`);
+  show(id: number): Observable<ParkingSpot> {
+    return this.http.get<ParkingSpot>(`${environment.url_backend}/parkingSpot/${id}`);
   }
 
   create(parkingSpot:ParkingSpot): any{

@@ -15,8 +15,8 @@ export class ParkingRatingService {
     return this.http.get<ParkingRating[]>(`${environment.url_backend}/parkingRating`);
   }
 
-  show(id: string): Observable<ParkingRating> {
-    return this.http.get<ParkingRating[]>(`${environment.url_backend}/parkingRating/${id}`);
+  show(id: number): Observable<ParkingRating> {
+    return this.http.get<ParkingRating>(`${environment.url_backend}/parkingRating/${id}`);
   }
 
   create(parkingRating:ParkingRating): any{

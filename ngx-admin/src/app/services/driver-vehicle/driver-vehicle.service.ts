@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpClientModule } from "@angular/common/http";
-import {environment} from '../../../../environments/environment';
+import {environment} from '../../../environments/environment';
 import { Observable } from 'rxjs';
 import { DriverVehicle } from '../../models/driver-vehicle/driver-vehicle.model';
 
@@ -15,8 +15,8 @@ export class DriverVehicleService {
     return this.http.get<DriverVehicle[]>(`${environment.url_backend}/driver-vehicles`);
   }
 
-  show(id: string): Observable<DriverVehicle> {
-    return this.http.get<DriverVehicle[]>(`${environment.url_backend}/driver-vehicles/${id}`);
+  show(id: number): Observable<DriverVehicle> {
+    return this.http.get<DriverVehicle>(`${environment.url_backend}/driver-vehicles/${id}`);
   }
 
   create(driverVehicle:DriverVehicle): any{
