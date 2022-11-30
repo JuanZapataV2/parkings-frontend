@@ -50,7 +50,7 @@ export class HeaderComponent implements OnInit, OnDestroy,OnChanges  {
 
     loginMenu= [
       { title: 'Log in', icon: 'fa fa-user', link: "pages/security/login" }];
-  
+
   constructor(private sidebarService: NbSidebarService,
               private menuService: NbMenuService,
               private themeService: NbThemeService,
@@ -62,11 +62,11 @@ export class HeaderComponent implements OnInit, OnDestroy,OnChanges  {
   }
 
   ngOnInit() {
+    this.subscription = this.SecuritySvc.getUser().subscribe(user => {
+      this.user = user;
+    });
+
     this.currentTheme = this.themeService.currentTheme;
-    if (this.SecuritySvc.UserSesionActiva.id != undefined) {
-      this.userService.show(this.SecuritySvc.UserSesionActiva.id)
-      .subscribe((user: User) => {this.user = user[0];});
-    }
 
     const { xl } = this.breakpointService.getBreakpointsMap();
     this.themeService.onMediaQueryChange()
