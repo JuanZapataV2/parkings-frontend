@@ -43,6 +43,17 @@ export const MENU_ITEMS: NbMenuItem[] = [
     ],
   },
   {
+    title: 'Parkings',
+    icon: 'user-outline',
+    //link: '/pages/parkings/create',
+    children: [
+      {
+        title: 'Create',
+        link: '/pages/parkings/create',
+      }
+    ],
+  },
+  {
     title: 'FEATURES',
     group: true,
   },

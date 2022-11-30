@@ -21,7 +21,6 @@ export class ServicesInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     //return next.handle(request);
-    console.log(this.SecuritySvc.UserSesionActiva.name )
     if (this.SecuritySvc.UserSesionActiva.token != undefined) {
       request = request.clone({
         setHeaders: {

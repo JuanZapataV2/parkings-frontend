@@ -5,11 +5,13 @@ import { FormsModule } from '@angular/forms';
 
 import { ParkingsRoutingModule } from './parkings-routing.module';
 import { CreateComponent } from './create/create.component';
+import { ListComponent } from './list/list.component';
 
 
 @NgModule({
   declarations: [
-    CreateComponent
+    CreateComponent,
+    ListComponent
   ],
   imports: [
     CommonModule,

@@ -6,6 +6,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ECommerceComponent } from './e-commerce/e-commerce.component';
 import { NotFoundComponent } from './miscellaneous/not-found/not-found.component';
 import { UsersModule } from './users/users.module';
+import { ParkingsModule } from './parkings/parkings.module';
 import { RolesModule } from './roles/roles.module';
 import { SecurityModule } from './security/security.module';
 
@@ -25,6 +26,11 @@ const routes: Routes = [{
       path: 'users',
       loadChildren: () => import('./users/users.module')
         .then(m => m.UsersModule),
+    },
+    {
+      path: 'parkings',
+      loadChildren: () => import('./parkings/parkings.module')
+        .then(m => m.ParkingsModule),
     },
     {
       path: 'security',

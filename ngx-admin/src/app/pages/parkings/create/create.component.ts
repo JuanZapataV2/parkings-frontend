@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 import Swal from "sweetalert2";
 import { Parking } from "../../../models/parkings/parking.model";
 import { ParkingService } from "../../../services/parkings/parking.service";
+import { SecurityService } from '../../../services/security/security.service';
 
 @Component({
   selector: "ngx-create",
@@ -12,7 +13,7 @@ import { ParkingService } from "../../../services/parkings/parking.service";
 })
 export class CreateComponent implements OnInit {
   createMode: boolean = true;
-  user_id: number;
+  parking_id: number;
   parking: Parking = {
     owner_id: null,
     name: null,
@@ -28,16 +29,20 @@ export class CreateComponent implements OnInit {
   constructor(
     private parkingSvc: ParkingService,
     private activeRoute: ActivatedRoute,
-    private router: Router
+    private router: Router, 
+    private securitySvc: SecurityService
   ) {}
 
   ngOnInit(): void {
     if (this.activeRoute.snapshot.params.id) {
       this.createMode = false;
-      this.user_id = this.activeRoute.snapshot.params.id;
-      this.getUser(this.user_id);
+      this.parking_id = this.activeRoute.snapshot.params.id;
+      this.getParking(this.parking_id);
     } else {
       this.createMode = true;
+    }
+    if (this.securitySvc.UserSesionActiva.token != undefined) {
+      this.parking.owner_id = this.securitySvc.UserSesionActiva.id;
     }
   }
 
@@ -50,7 +55,7 @@ export class CreateComponent implements OnInit {
           "El parqueadero ha sido creado correctamente",
           "success"
         );
-        this.router.navigate(["pages/users/list"]);
+        this.router.navigate(["pages/parkings/list"]);
       });
     } else {
       Swal.fire(
@@ -58,7 +63,6 @@ export class CreateComponent implements OnInit {
         "Todos los campos deben ser llenados",
         "warning"
       );
-
     }
   }
 
@@ -81,9 +85,9 @@ export class CreateComponent implements OnInit {
     }
   }
 
-  getUser(id: number) {
+  getParking(id: number) {
     this.parkingSvc.show(id).subscribe((data) => {
-      this.parking = data[0];
+      this.parking = data;
     });
   }
 
@@ -93,7 +97,6 @@ export class CreateComponent implements OnInit {
       this.parking.name == "" ||
       this.parking.address == "" ||
       this.parking.number_spaces == null ||
-      this.parking.owner_id == null ||
       this.parking.telephone == ""
     ) {
       return false;
