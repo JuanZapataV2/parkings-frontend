@@ -50,6 +50,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
       {
         title: 'Create',
         link: '/pages/parkings/create',
+      },
+      {
+        title: 'List',
+        link: '/pages/parkings/list',
       }
     ],
   },

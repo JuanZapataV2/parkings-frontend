@@ -8,7 +8,7 @@ export class Parking {
   address: string
   telephone: string
   number_spaces: number
-  open_hours: JSON
+  open_hours?: string
   parking_owner: ParkingOwner
   parking_spots: [ParkingSpot]
 
