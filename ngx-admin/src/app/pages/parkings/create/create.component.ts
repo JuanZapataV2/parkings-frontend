@@ -185,6 +185,7 @@ export class CreateComponent implements OnInit {
       let spot: ParkingSpot = {
         parking_id: parking_id,
         code: "p" + i,
+        occupied: false,
       };
       this.parkingSpotSvc.create(spot).subscribe((data) => {
         if (i === this.parking.number_spaces - 1) return true;

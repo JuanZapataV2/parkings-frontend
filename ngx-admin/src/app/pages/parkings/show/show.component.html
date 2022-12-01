@@ -1,0 +1,34 @@
+<div class="container">
+    <div class="jumbotron jumbotron-fluid">
+      <a (click)="goBack()" class="btn btn-primary back">Go back</a>
+        <div class="row">
+
+          <div class="col-md-8">
+              <h4>{{parking?.name}}</h4>
+              <br>
+              <h6>Owner:</h6>
+              {{parking?.owner_id}}
+              <br><br>
+              <h6>Address:</h6>
+              {{parking?.address }} 
+             
+              <hr>
+              
+          </div>
+          <div class="container " *ngIf="parking_spots.length > 0">
+            <h1> Parking spots</h1> <br>
+            <div class="parkings-container">
+                <div class="parking" *ngFor="let spot of parking_spots" >
+                    <a *ngIf="spot.occupied"  class="parking occupied">{{spot.code}}</a>
+                    <a *ngIf="!spot.occupied" (click)="createReservation(spot.id)" class=" parking free">{{spot.code}}</a>
+                </div>
+            </div>
+        
+
+          </div>
+
+          <div class="container" *ngIf="parking_spots.length == 0">
+            <h1> This parking doesnt have available spots</h1>
+        </div>
+    </div>
+</div>

@@ -7,11 +7,13 @@ import { ParkingsRoutingModule } from './parkings-routing.module';
 import { CreateComponent } from './create/create.component';
 import { ListComponent } from './list/list.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ShowComponent } from './show/show.component';
 
 @NgModule({
   declarations: [
     CreateComponent,
-    ListComponent
+    ListComponent,
+    ShowComponent
   ],
   imports: [
     CommonModule,

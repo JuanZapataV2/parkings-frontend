@@ -22,6 +22,12 @@ export class ParkingSpotService {
     );
   }
 
+  getAllSpots(parking_id: number): Observable<ParkingSpot[]> {
+    return this.http.get<ParkingSpot[]>(
+      `${environment.url_backend}/parkingSpot/getAll/${parking_id}`
+    );
+  }
+
   create(parkingSpot: ParkingSpot): any {
     return this.http.post(
       `${environment.url_backend}/parkingSpot`,

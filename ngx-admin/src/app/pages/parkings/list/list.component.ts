@@ -19,14 +19,13 @@ export class ListComponent implements OnInit {
 
   listParkings(): void {
     this.parkingSvc.index().subscribe((parkings) => {
-      console.log(parkings);
       this.parkings = parkings;
     });
   }
 
   deleteParking(id: number): void {
     Swal.fire({
-      title: "Eliminar parqeuadero",
+      title: "Eliminar parqueadero",
       text: "Está seguro que quiere eliminar el parqueadero?",
       icon: "warning",
       showCancelButton: true,
@@ -53,5 +52,9 @@ export class ListComponent implements OnInit {
 
   createParking(): void {
     this.router.navigate(["/pages/parkings/create"]);
+  }
+
+  showParking(id: number):void{
+    this.router.navigate([`pages/parkings/show/${id}`]);
   }
 }
