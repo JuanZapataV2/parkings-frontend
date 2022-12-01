@@ -20,12 +20,12 @@ export class VehicleService {
   }
 
   create(vehicle:Vehicle): any{
-    return this.http.post(`${environment.url_backend}/vehicle`, vehicle)
+    return this.http.post(`${environment.url_backend}/vehicles`, vehicle)
 
   }
 
   update(vehicle:Vehicle): any{
-    return this.http.put(`${environment.url_backend}/vehicle/${vehicle.id}`, vehicle)
+    return this.http.put(`${environment.url_backend}/vehicles/${vehicle.id}`, vehicle)
   }
 
   destroy(id: string) {
