@@ -45,7 +45,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Parkings',
     icon: 'user-outline',
-    //link: '/pages/parkings/create',
+    link: '/pages/parkings/list',
     children: [
       {
         title: 'Create',
@@ -54,6 +54,24 @@ export const MENU_ITEMS: NbMenuItem[] = [
       {
         title: 'List',
         link: '/pages/parkings/list',
+<<<<<<< Updated upstream
+=======
+      }
+    ],
+  },
+  {
+    title: 'Vehicles',
+    icon: 'user-outline',
+    link: '/pages/vehicles/list',
+    children: [
+      {
+        title: 'Create',
+        link: '/pages/vehicles/create',
+      },
+      {
+        title: 'List',
+        link: '/pages/vehicles/list',
+>>>>>>> Stashed changes
       }
     ],
   },
