@@ -30,8 +30,8 @@
         </div>
     </div>
     <br>
-    <div class="row">
-        <div class="col-3">
+    <div class="row" *ngIf="createMode">
+        <div class="col-3" >
             <label>Number of available spaces</label>
         </div>
         <div class="col-9">
@@ -58,9 +58,13 @@
                 </a>
             </div>
         </div>
-
-
     </form>
+
+    <div class="row" *ngIf="!createMode">
+        <div class="col-3" >
+            <label>Edit available spots</label>
+        </div>
+    </div>
 
     <div class="row">
         <button *ngIf="createMode" class="btn btn-primary btn-block" (click)="create()">Crear</button>

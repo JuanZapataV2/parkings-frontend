@@ -116,15 +116,15 @@ export class CreateComponent implements OnInit {
   }
 
   update(): void {
+    this.getOpeningHours();
     if (this.validateData()) {
-      this.createParkingSpots();
       this.parkingSvc.update(this.parking).subscribe((data) => {
         Swal.fire(
           "Actualizado",
           "El parqueadero ha sido actualizado correctamente",
           "success"
         );
-        this.router.navigate(["pages/users/list"]);
+        this.router.navigate(["pages/parkings/list"]);
       });
     } else {
       Swal.fire("Error", "Todos los campos deben ser llenados", "warning");

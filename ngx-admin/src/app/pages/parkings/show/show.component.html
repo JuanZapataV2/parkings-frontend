@@ -1,34 +1,53 @@
 <div class="container">
-    <div class="jumbotron jumbotron-fluid">
-      <a (click)="goBack()" class="btn btn-primary back">Go back</a>
-        <div class="row">
+  <div class="jumbotron jumbotron-fluid">
+    <a (click)="goBack()" class="btn btn-primary back">Go back</a>
+    <div class="row">
 
-          <div class="col-md-8">
-              <h4>{{parking?.name}}</h4>
-              <br>
-              <h6>Owner:</h6>
-              {{parking?.owner_id}}
-              <br><br>
-              <h6>Address:</h6>
-              {{parking?.address }} 
-             
-              <hr>
-              
-          </div>
-          <div class="container " *ngIf="parking_spots.length > 0">
-            <h1> Parking spots</h1> <br>
-            <div class="parkings-container">
-                <div class="parking" *ngFor="let spot of parking_spots" >
-                    <a *ngIf="spot.occupied"  class="parking occupied">{{spot.code}}</a>
-                    <a *ngIf="!spot.occupied" (click)="createReservation(spot.id)" class=" parking free">{{spot.code}}</a>
-                </div>
+      <div class="col-md-8 ">
+        <h1>{{parking?.name}}</h1>
+        <br>
+        <h6><u>Telephone</u>: {{parking?.telephone}}</h6>
+        <br>
+        <h6><u>Address</u>: {{parking?.address }} </h6>
+        <br>
+        <h6><u>Schedule</u>: </h6>
+        <div *ngIf="days.length > 0">
+          <div class="day-list">
+            <div *ngFor="let day of days" class="day">
+              {{day}}
             </div>
-        
+          </div>
+
+          <br>
+          <div>
+            <i>
+              From: {{open_hour[0]}}:<a *ngIf="open_hour[0] <10">0</a>{{open_hour[1]}}
+              <a *ngIf="open_hour[0] <=12">A.M.</a> <a *ngIf="open_hour[0] >12">P.M.</a>
+              To: {{end_hour[0]}}:<a *ngIf="end_hour[0] <10">0</a>{{end_hour[1]}}
+
+              <a *ngIf="end_hour[0] <=12">A.M.</a> <a *ngIf="end_hour[0] >12">P.M.</a>
+            </i>
 
           </div>
 
-          <div class="container" *ngIf="parking_spots.length == 0">
-            <h1> This parking doesnt have available spots</h1>
         </div>
+        <hr>
+
+      </div>
+      <div class="container " *ngIf="parking_spots.length > 0">
+        <h1> Parking spots</h1> <br>
+        <div class="parkings-container">
+          <div class="parking" *ngFor="let spot of parking_spots">
+            <a *ngIf="spot.occupied" class="parking occupied">{{spot.code}}</a>
+            <a *ngIf="!spot.occupied" (click)="createReservation(spot.id)" class=" parking free">{{spot.code}}</a>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div class="container" *ngIf="parking_spots.length == 0">
+        <h1> This parking doesnt have available spots</h1>
+      </div>
     </div>
-</div>
+  </div>

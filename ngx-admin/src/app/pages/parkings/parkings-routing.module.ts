@@ -17,6 +17,10 @@ const routes: Routes = [
     path: "show/:id",
     component: ShowComponent,
   },
+  {
+    path:'update/:id',
+    component: CreateComponent
+  },
 ];
 
 @NgModule({

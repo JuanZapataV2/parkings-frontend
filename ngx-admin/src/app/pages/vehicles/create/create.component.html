@@ -1,19 +1,20 @@
 <div class="container">
   <div class="row">
-      <h1 *ngIf="createMode">Create vehicle</h1>
-      <h1 *ngIf="!createMode">Edit vehicle</h1>
-  </div>
-  <div class="row">
-      <div class="col-3">
-          <label>Matricula</label>
-      </div>
-      <div class="col-9">
-          <input type="text" class="form-control" [(ngModel)]="vehicle.license_plate"/>
-      </div>
+    <h1 *ngIf="createMode">Create vehicle</h1>
+    <h1 *ngIf="!createMode">Edit vehicle</h1>
   </div>
   <div class="row">
     <div class="col-3">
-        <label>Tipo de vehiculo</label>
+      <label>Matricula</label>
+    </div>
+    <div class="col-9">
+      <input type="text" class="form-control" [(ngModel)]="vehicle.license_plate" />
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-3">
+      <label>Tipo de vehiculo</label>
     </div>
     <div class="col-9">
       <select name="userType" [(ngModel)]="vehicleType">
@@ -23,19 +24,20 @@
       </select>
     </div>
   </div>
+  <br>
   <div class="row" *ngIf="vehicleType == '2'">
     <div class="col-3">
-        <label>Matricula Casco</label>
+      <label>Matricula Casco</label>
     </div>
     <div class="col-9">
-      <div class="col-9">
-        <input type="text" class="form-control" [(ngModel)]="bike.helmet"/>
+
+      <input type="text" class="form-control" [(ngModel)]="bike.helmet" />
     </div>
-    </div>
+    <br>
   </div>
   <div class="row" *ngIf="vehicleType == '1'">
     <div class="col-3">
-        <label>Tipo de Carro</label>
+      <label>Tipo de Carro</label>
     </div>
     <div class="col-9">
       <select name="userType" [(ngModel)]="car.type">
@@ -45,8 +47,9 @@
       </select>
     </div>
   </div>
+  <br>
   <div class="row">
-      <button *ngIf="createMode" class="btn btn-primary btn-block" (click)="create()">Crear</button>
-      <button *ngIf="!createMode" class="btn btn-primary btn-block" (click)="update()">Editar</button>
+    <button *ngIf="createMode" class="btn btn-primary btn-block" (click)="create()">Crear</button>
+    <button *ngIf="!createMode" class="btn btn-primary btn-block" (click)="update()">Editar</button>
   </div>
 </div>

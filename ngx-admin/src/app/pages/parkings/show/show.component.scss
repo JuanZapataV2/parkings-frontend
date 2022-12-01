@@ -4,10 +4,23 @@
     margin: 3px;
     text-align: center;
     font-weight: bold;
+    border-radius: 10%;
 }
 
 .occupied{
     background-color: red;
+}
+
+.day-list{
+    background: #d9dcde;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.day{
+    margin: 10px;
+    border-radius: 10%;
+
 }
 
 

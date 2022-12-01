@@ -16,6 +16,9 @@ export class ShowComponent implements OnInit {
   parking_id: number;
   parking: Parking;
   parking_spots: ParkingSpot[] = [];
+  days= [];
+  open_hour:Number[] = [];
+  end_hour:Number[] = [];
 
   constructor(private parkingSvc: ParkingService,
     private activeRoute: ActivatedRoute,
@@ -42,6 +45,7 @@ export class ShowComponent implements OnInit {
   getParking(id: number) {
     this.parkingSvc.show(id).subscribe((data) => {
       this.parking = data;
+      this.formatSchedule();
     });
   }
 
@@ -49,6 +53,16 @@ export class ShowComponent implements OnInit {
     this.parkingSpotSvc.getAllSpots(id).subscribe((data) => {
       this.parking_spots = data;
     });
+  }
+
+  formatSchedule(){
+    let schedule = JSON.parse(this.parking.open_hours);
+    this.days = schedule.days;
+    this.days = this.days.map((day)=> {return day.charAt(0).toUpperCase() + day.slice(1); });
+    this.open_hour.push(Number(schedule.startTime.hour));
+    this.open_hour.push(Number(schedule.startTime.minute));
+    this.end_hour.push(Number(schedule.endTime.hour));
+    this.end_hour.push(Number(schedule.endTime.minute));
   }
 
   goBack() {

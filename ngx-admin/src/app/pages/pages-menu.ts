@@ -54,8 +54,6 @@ export const MENU_ITEMS: NbMenuItem[] = [
       {
         title: 'List',
         link: '/pages/parkings/list',
-<<<<<<< Updated upstream
-=======
       }
     ],
   },
@@ -71,7 +69,6 @@ export const MENU_ITEMS: NbMenuItem[] = [
       {
         title: 'List',
         link: '/pages/vehicles/list',
->>>>>>> Stashed changes
       }
     ],
   },
