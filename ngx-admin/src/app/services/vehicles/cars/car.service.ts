@@ -20,12 +20,12 @@ export class CarService {
   }
 
   create(car:Car): any{
-    return this.http.post(`${environment.url_backend}/car`, car)
+    return this.http.post(`${environment.url_backend}/vehicles/car/`, car)
 
   }
 
   update(car:Car): any{
-    return this.http.put(`${environment.url_backend}/car/${car.id}`, car)
+    return this.http.put(`${environment.url_backend}/vehicles/car//${car.id}`, car)
   }
 
   destroy(id: string) {

@@ -1,0 +1,52 @@
+<div class="container">
+  <div class="row">
+      <h1 *ngIf="createMode">Create vehicle</h1>
+      <h1 *ngIf="!createMode">Edit vehicle</h1>
+  </div>
+  <div class="row">
+      <div class="col-3">
+          <label>Matricula</label>
+      </div>
+      <div class="col-9">
+          <input type="text" class="form-control" [(ngModel)]="vehicle.license_plate"/>
+      </div>
+  </div>
+  <div class="row">
+    <div class="col-3">
+        <label>Tipo de vehiculo</label>
+    </div>
+    <div class="col-9">
+      <select name="userType" [(ngModel)]="vehicleType">
+        <option value="">Seleccione tipo de vehiculo</option>
+        <option value="1">Carro</option>
+        <option value="2">Moto</option>
+      </select>
+    </div>
+  </div>
+  <div class="row" *ngIf="vehicleType == '2'">
+    <div class="col-3">
+        <label>Matricula Casco</label>
+    </div>
+    <div class="col-9">
+      <div class="col-9">
+        <input type="text" class="form-control" [(ngModel)]="bike.helmet"/>
+    </div>
+    </div>
+  </div>
+  <div class="row" *ngIf="vehicleType == '1'">
+    <div class="col-3">
+        <label>Tipo de Carro</label>
+    </div>
+    <div class="col-9">
+      <select name="userType" [(ngModel)]="car.type">
+        <option value="">Seleccione tipo de carro</option>
+        <option value=2>Publico</option>
+        <option value=1>Particular</option>
+      </select>
+    </div>
+  </div>
+  <div class="row">
+      <button *ngIf="createMode" class="btn btn-primary btn-block" (click)="create()">Crear</button>
+      <button *ngIf="!createMode" class="btn btn-primary btn-block" (click)="update()">Editar</button>
+  </div>
+</div>

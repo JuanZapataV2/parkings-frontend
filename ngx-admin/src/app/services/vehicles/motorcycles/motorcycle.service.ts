@@ -20,12 +20,12 @@ export class MotorcycleService {
   }
 
   create(motorcycle:Motorcycle): any{
-    return this.http.post(`${environment.url_backend}/motorcycle`, motorcycle)
+    return this.http.post(`${environment.url_backend}/vehicles/motorcycle`, motorcycle)
 
   }
 
   update(motorcycle:Motorcycle): any{
-    return this.http.put(`${environment.url_backend}/motorcycle/${motorcycle.id}`, motorcycle)
+    return this.http.put(`${environment.url_backend}/vehicles/motorcycle/${motorcycle.id}`, motorcycle)
   }
 
   destroy(id: string) {

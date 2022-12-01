@@ -33,6 +33,11 @@ const routes: Routes = [{
         .then(m => m.ParkingsModule),
     },
     {
+      path: 'vehicles',
+      loadChildren: () => import('./vehicles/vehicles.module')
+        .then(m => m.VehiclesModule),
+    },
+    {
       path: 'security',
       loadChildren: () => import('./security/security.module')
         .then(m => m.SecurityModule),
