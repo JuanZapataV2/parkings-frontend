@@ -8,12 +8,14 @@ import { CreateComponent } from './create/create.component';
 import { ListComponent } from './list/list.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ShowComponent } from './show/show.component';
+import { EditSpotComponent } from './edit-spot/edit-spot.component';
 
 @NgModule({
   declarations: [
     CreateComponent,
     ListComponent,
-    ShowComponent
+    ShowComponent,
+    EditSpotComponent
   ],
   imports: [
     CommonModule,

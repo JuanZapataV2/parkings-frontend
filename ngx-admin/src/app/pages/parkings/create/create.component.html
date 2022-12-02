@@ -31,11 +31,11 @@
     </div>
     <br>
     <div class="row" *ngIf="createMode">
-        <div class="col-3" >
+        <div class="col-3">
             <label>Number of available spaces</label>
         </div>
         <div class="col-9">
-            <input type="number" class="form-control" [(ngModel)]="parking.number_spaces" />
+            <input type="number" class="form-control" [(ngModel)]="parking.number_spaces" max="500" min="1"/>
         </div>
     </div>
     <br>
@@ -60,14 +60,35 @@
         </div>
     </form>
 
-    <div class="row" *ngIf="!createMode">
-        <div class="col-3" >
-            <label>Edit available spots</label>
+    <div class="row" *ngIf="!createMode && !edit_spots">
+        <div class="col-3">
+            <button class="btn btn-primary btn-block" (click)="editSpots()">Edit available spots</button>
         </div>
     </div>
 
-    <div class="row">
-        <button *ngIf="createMode" class="btn btn-primary btn-block" (click)="create()">Crear</button>
-        <button *ngIf="!createMode" class="btn btn-primary btn-block" (click)="update()">Editar</button>
+    <div class="row" *ngIf="edit_spots">
+        <div class="col-3">
+            <button class="btn btn-primary btn-block" (click)="hideSpots()">Hide spots</button>
+        </div>
     </div>
-</div>
+
+    <div class="container " *ngIf="parking_spots.length > 0">
+        <h1> Parking spots</h1> <br>
+        <div class="parkings-container">
+            <div class="parking" *ngFor="let spot of parking_spots">
+                <a *ngIf="spot.occupied" class="parking occupied">{{spot.code}}</a>
+                <a *ngIf="!spot.occupied" (click)="createReservation(spot.id)" class=" parking free">{{spot.code}}</a>
+                <div class="button-group">
+                    <a  (click)="deleteSpot(spot.id)" class=" parking delete">Delete</a>
+                    <a  (click)="editSpot(spot.id)" class=" parking update">Edit</a>
+                </div>
+                </div>
+            </div>
+        </div>
+         <br>
+
+        <div class="row">
+            <button *ngIf="createMode" class="btn btn-primary btn-block" (click)="create()">Crear</button>
+            <button *ngIf="!createMode" class="btn btn-primary btn-block" (click)="update()">Editar</button>
+        </div>
+    </div>

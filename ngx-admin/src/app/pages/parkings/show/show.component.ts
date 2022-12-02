@@ -52,6 +52,7 @@ export class ShowComponent implements OnInit {
   getParkingSpots(id: number) {
     this.parkingSpotSvc.getAllSpots(id).subscribe((data) => {
       this.parking_spots = data;
+      console.log(data);
     });
   }
 

@@ -42,9 +42,15 @@ export class ParkingSpotService {
     );
   }
 
-  destroy(id: string) {
+  destroy(id: number) {
     return this.http.delete<ParkingSpot>(
       `${environment.url_backend}/parkingSpot/${id}`
+    );
+  }
+
+  getLast(parking_id: number): Observable<ParkingSpot> {
+    return this.http.get<ParkingSpot>(
+      `${environment.url_backend}/parkingSpot/getLast/${parking_id}`
     );
   }
 }

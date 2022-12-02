@@ -33,3 +33,57 @@ input[type="checkbox"] {
     gap: 0px;
     height: 100%;
 }
+
+.parking{
+    padding: 10px;
+    display: block;
+    margin: 3px;
+    text-align: center;
+    font-weight: bold;
+    border-radius: 10%;
+}
+
+.occupied{
+    background-color: red;
+}
+
+.day-list{
+    background: #d9dcde;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.day{
+    margin: 10px;
+    border-radius: 10%;
+
+}
+
+
+.free{
+    background-color: greenyellow;
+}
+
+.parkings-container{
+    display: grid;
+    width: 800px;
+    height: 500px;
+    overflow-y: scroll;
+    overflow-x: scroll;
+    grid-row: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+}
+
+.delete{
+    background-color: red;
+}
+
+.button-group{
+    display: grid;
+    grid-row: 1fr ;
+    grid-template-columns: 1fr 1fr;
+}
+.update{
+    background-color: yellow;
+    display: block;
+}

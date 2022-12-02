@@ -71,7 +71,6 @@ export class CreateComponent implements OnInit {
           "El vehiculo ha sido creado correctamente",
           "success"
         );
-      console.log(this.vehicleType)
         switch (this.vehicleType) {
           case "1":
             console.log("hago carro");
