@@ -28,7 +28,7 @@ export class CarService {
     return this.http.put(`${environment.url_backend}/vehicles/car//${car.id}`, car)
   }
 
-  destroy(id: string) {
+  destroy(id: number) {
     return this.http.delete<Car>(`${environment.url_backend}/vehicles/car/${id}`);
   }
 }

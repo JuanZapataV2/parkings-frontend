@@ -8,6 +8,7 @@ import { Motorcycle } from '../../../models/motorcycles/motorcycle.model';
 import { Car } from '../../../models/cars/car.model';
 import { CarService } from '../../../services/vehicles/cars/car.service';
 import { MotorcycleService } from '../../../services/vehicles/motorcycles/motorcycle.service';
+import { DriverService } from '../../../services/users/drivers/driver.service';
 
 
 @Component({
@@ -39,9 +40,12 @@ export class CreateComponent implements OnInit {
 
   sendAttempt: boolean = false;
   vehicleType: string;
+  owner_id: string;
+  driver_id : number;
 
   constructor(
     private vehicleSvc: VehicleService,
+    private driverSvc: DriverService,
     private carSvc: CarService,
     private bikeSvc: MotorcycleService,
     private activeRoute: ActivatedRoute,
@@ -58,20 +62,22 @@ export class CreateComponent implements OnInit {
       this.createMode = true;
     }
     if (this.securitySvc.UserSesionActiva.token != undefined) {
-      //this.vehicle.owner_id = this.securitySvc.UserSesionActiva.id;
+      this.owner_id = this.securitySvc.UserSesionActiva.role.name;
     }
   }
 
   create(): void {
     if (this.validateData()) {
       this.sendAttempt = true;
+      this.driverSvc.show(this.driver_id).subscribe((data) => {
+        this.vehicle.drivers = [data];
+      });
       this.vehicleSvc.create(this.vehicle).subscribe((data) => {
         Swal.fire(
           "Creado",
           "El vehiculo ha sido creado correctamente",
           "success"
         );
-      console.log(this.vehicleType)
         switch (this.vehicleType) {
           case "1":
             console.log("hago carro");
@@ -134,9 +140,8 @@ export class CreateComponent implements OnInit {
 
   validateData(): boolean {
     this.sendAttempt = true;
-    if (
-      this.vehicle.license_plate == ""
-    ) {
+    console.log("this.vehicle.license_plate", this.vehicle.license_plate)
+    if ( this.vehicle.license_plate == null) {
       return false;
     } else {
       return true;

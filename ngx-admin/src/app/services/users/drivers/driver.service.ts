@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpClientModule } from "@angular/common/http";
-import {environment} from '../../../environments/environment';
+import {environment} from '../../../../environments/environment';
 import { Observable } from 'rxjs';
 import { Driver } from '../../../models/drivers/driver.model';
 
@@ -15,8 +15,8 @@ export class DriverService {
     return this.http.get<Driver[]>(`${environment.url_backend}/users_owner`);
   }
 
-  show(id: string): Observable<Driver> {
-    return this.http.get<Driver[]>(`${environment.url_backend}/users/drivers/${id}`);
+  show(id: number): Observable<Driver> {
+    return this.http.get<Driver>(`${environment.url_backend}/users/drivers/${id}`);
   }
 
   create(driver:Driver): any{
@@ -28,7 +28,7 @@ export class DriverService {
     return this.http.put(`${environment.url_backend}/driver/${driver.id}`, driver)
   }
 
-  destroy(id: string) {
+  destroy(id: number) {
     return this.http.delete<Driver>(`${environment.url_backend}/users/drivers/${id}`);
   }
 }

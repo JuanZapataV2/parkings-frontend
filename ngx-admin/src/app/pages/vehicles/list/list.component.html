@@ -1,1 +1,32 @@
-<p>list works!</p>
+<div class="container">
+  <h1>Vehicles</h1>
+  <button class="btn btn-primary" (click)="createVehicle()">Create</button>
+  <table class="table">
+     <thead>
+          <tr>
+              <th *ngFor="let column of columns" scope="col">
+                  {{column}}
+              </th>
+          </tr>
+     </thead>
+     <tbody>
+          <tr *ngFor="let vehicle of vehicles" scope="col">
+              <td>{{vehicle.id}}</td>
+              <td>{{vehicle.vehicle.license_plate}}</td>
+              <td *ngIf="vehicle.helmet">{{vehicle.helmet}}</td>
+              <td *ngIf="!vehicle.helmet"></td>
+              <td *ngIf="vehicle.type">{{vehicle.type == "1"? "Public" : "Private"}}</td>
+              <td *ngIf="!vehicle.type"></td>
+              <td>{{vehicle.type ? "Car" : "Motorcycle"}}</td>
+
+              <td>
+                  <button class="btn btn-warning" (click)="updateVehicle(vehicle.id, vehicle.helmet)">Edit</button>
+                  <button class="btn btn-danger" (click)="deleteVehicle(vehicle.id, vehicle.helmet)">Delete</button>
+
+              </td>
+          </tr>
+
+     </tbody>
+
+  </table>
+</div>
