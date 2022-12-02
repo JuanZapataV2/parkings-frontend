@@ -1,0 +1,39 @@
+<div class="container">
+    <div class="row">
+        <h1 >Edit parkign spot {{spot?.code}}</h1>
+    </div>
+    <div class="row">
+        <div class="col-3">
+            <label>Code</label>
+        </div>
+        <div class="col-9">
+            <input type="text" class="form-control" [(ngModel)]="spot.code" />
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-3">
+            <label>observations</label>
+        </div>
+        <div class="col-9">
+            <input type="text" class="form-control" [(ngModel)]="spot.observations" />
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-3">
+            <label>Spot status</label>
+        </div>
+        <div class="col-9">
+            <select name="status" [(ngModel)]="occupied">
+              <option value="1">Occupied</option>
+              <option value="0">Free</option>
+            </select>
+          </div>
+    </div>
+    
+      <br>
+        <div class="row">
+            <button class="btn btn-primary btn-block" (click)="update()">Edit</button>
+        </div>
+    </div>

@@ -38,8 +38,8 @@
         <h1> Parking spots</h1> <br>
         <div class="parkings-container">
           <div class="parking" *ngFor="let spot of parking_spots">
-            <a *ngIf="spot.occupied" class="parking occupied">{{spot.code}}</a>
-            <a *ngIf="!spot.occupied" (click)="createReservation(spot.id)" class=" parking free">{{spot.code}}</a>
+            <a *ngIf="spot.occupied" class="parking occupied" matTooltip="{{spot.observations}}">{{spot.code}}</a>
+          <a *ngIf="!spot.occupied" (click)="createReservation(spot.id)" class=" parking free">{{spot.code}}</a>
           </div>
         </div>
 

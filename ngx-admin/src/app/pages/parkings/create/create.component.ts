@@ -12,7 +12,7 @@ import { Parking } from "../../../models/parkings/parking.model";
 import { ParkingService } from "../../../services/parkings/parking.service";
 import { SecurityService } from "../../../services/security/security.service";
 import { ParkingSpotService } from "../../../services/parkings/parkingSpot/parking-spot.service";
-import { ParkingSpot } from "../../../models/parking-spots/parking-spot.model";
+import { ParkingSpot } from '../../../models/parking-spots/parking-spot.model';
 
 @Component({
   selector: "ngx-create",
@@ -33,6 +33,8 @@ export class CreateComponent implements OnInit {
     parking_owner: null,
     parking_spots: null,
   };
+
+  parking_spots: ParkingSpot[] = [];
   endTime = {
     hour: 0,
     minute: 0,
@@ -57,7 +59,8 @@ export class CreateComponent implements OnInit {
     "sunday",
   ];
   sendAttempt: boolean = false;
-
+  edit_spots: boolean = false;
+  previous_spots: number;
   constructor(
     private parkingSvc: ParkingService,
     private activeRoute: ActivatedRoute,
@@ -134,6 +137,7 @@ export class CreateComponent implements OnInit {
   getParking(id: number) {
     this.parkingSvc.show(id).subscribe((data) => {
       this.parking = data;
+      this.previous_spots = this.parking.number_spaces;
     });
   }
 
@@ -193,5 +197,45 @@ export class CreateComponent implements OnInit {
     }
     setTimeout(() => {}, 5000);
     return true;
+  }
+
+  editSpots() {
+    this.parking_spots = [];
+    this.parkingSpotSvc.getAllSpots(this.parking.id).subscribe((data) => {
+      this.parking_spots = data;
+      this.edit_spots = true;
+    });
+  }
+
+  hideSpots() {
+    this.edit_spots = false;
+    this.parking_spots = [];
+  }
+
+  deleteSpot(spot_id: number) {
+    Swal.fire({
+      title: "Eliminar lugar de parqueo",
+      text: "Está seguro que quiere eliminar este lugar de parqueo?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Si, eliminar",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.parkingSpotSvc.destroy(spot_id).subscribe((data) => {
+          Swal.fire(
+            "Eliminado!",
+            "El lugar ha sido eliminada correctamente",
+            "success"
+          );
+          this.editSpots();
+        });
+      }
+    });
+  }
+
+  editSpot(spot_id: number): void {
+    this.router.navigate([`pages/parkings/spot/${spot_id}`]);
   }
 }
