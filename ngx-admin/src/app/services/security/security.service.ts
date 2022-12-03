@@ -106,4 +106,15 @@ export class SecurityService {
   let sesionActual = localStorage.getItem('sesion');
   return sesionActual;
  }
+
+ verificarRolSesion(role_id):boolean{
+  let currentSession = JSON.parse(this.getDatosSesion()).role.id;
+  if (currentSession == role_id) {
+    return true;
+  } else {
+    return false;
+  }
+
+
+ }
 }
