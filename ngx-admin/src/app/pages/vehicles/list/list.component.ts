@@ -17,6 +17,7 @@ export class ListComponent implements OnInit {
 
   columns:string[] = ["Id","License Plate","Helmet Number","Vehicle type","Type"]
   vehicles: any[];
+  vehiclesBP: Vehicle[];
   cars: Car[];
   bikes: Motorcycle[];
 
@@ -37,11 +38,10 @@ export class ListComponent implements OnInit {
   }
 
   listVehicles(): void {
-    // this.vehicleSvc.index().subscribe(vehicles =>{
-    //   this.vehicles = vehicles;
-    // });
-    this.vehicles = [...this.cars, ...this.bikes]
-
+    this.vehicleSvc.index().subscribe(vehicles =>{
+      this.vehiclesBP = vehicles;
+      console.log(this.vehiclesBP)
+    });
   }
 
   getVehicles(): void {
@@ -67,7 +67,6 @@ export class ListComponent implements OnInit {
       confirmButtonText: 'Si, eliminar'
     }).then((result) => {
       if (result.isConfirmed) {
-        console.log(isCar)
         if(isCar){
           this.bikeSvc.destroy(id).
           subscribe(data => {

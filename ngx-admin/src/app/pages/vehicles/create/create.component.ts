@@ -38,6 +38,10 @@ export class CreateComponent implements OnInit {
     vehicle_id: 0
   }
 
+  updateVehicle: any = {
+
+  }
+
   sendAttempt: boolean = false;
   vehicleType: string;
   owner_id: string;
@@ -133,8 +137,15 @@ export class CreateComponent implements OnInit {
   }
 
   getVehicle(id: number) {
-    this.vehicleSvc.show(id).subscribe((data) => {
-      this.vehicle = data;
+    // this.vehicleSvc.show(id).subscribe((data) => {
+    //   this.vehicle = data;
+    // });
+    this.carSvc.show(id).subscribe(cars =>{
+      this.car = cars;
+    });
+
+    this.bikeSvc.show(id).subscribe(bikes =>{
+      this.bike = bikes;
     });
   }
 

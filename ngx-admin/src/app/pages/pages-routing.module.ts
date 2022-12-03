@@ -35,6 +35,16 @@ const routes: Routes = [{
         .then(m => m.VehiclesModule),
     },
     {
+      path: 'reservations',
+      loadChildren: () => import('./reservations/reservations.module')
+        .then(m => m.ReservationsModule),
+    },
+    {
+      path: 'ratings',
+      loadChildren: () => import('./ratings/ratings.module')
+        .then(m => m.RatingsModule),
+    },
+    {
       path: 'security',
       loadChildren: () => import('./security/security.module')
         .then(m => m.SecurityModule),

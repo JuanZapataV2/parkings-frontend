@@ -27,7 +27,7 @@ export class PagesComponent {
   ngOnInit(){
     this.subscription = this.securitySvc.getUser().subscribe((data)=>{
       this.isLogged = true;
-      
+
       this.updateMenuRole(JSON.parse(this.securitySvc.getDatosSesion()).role.id);
     });
   }
@@ -46,7 +46,7 @@ export class PagesComponent {
     MENU_ITEMS.forEach(actualNameMenuItem => {
       if(nameMenuItems.indexOf(actualNameMenuItem.title)!=-1){
         this.menu.push(actualNameMenuItem);
-        
+
       }
     });
   }
@@ -57,7 +57,7 @@ export class PagesComponent {
         items.push(itemActual.url);
       });
     }
-    
+
     return items;
   }
 }

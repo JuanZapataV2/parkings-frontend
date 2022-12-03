@@ -22,6 +22,36 @@ export const MENU_ITEMS: NbMenuItem[] = [
       }
     ],
   },
+  {
+    title: 'Reservations',
+    icon: 'user-outline',
+    link: '/pages/reservations/list',
+    children: [
+      {
+        title: 'Create',
+        link: '/pages/reservations/create',
+      },
+      {
+        title: 'List',
+        link: '/pages/reservations/list',
+      }
+    ],
+  },
+  {
+    title: 'Ratings',
+    icon: 'user-outline',
+    link: '/pages/ratings/list',
+    children: [
+      {
+        title: 'Create',
+        link: '/pages/ratings/create',
+      },
+      {
+        title: 'List',
+        link: '/pages/ratings/list',
+      }
+    ],
+  },
   // {
   //   title: 'Roles',
   //   icon: 'user-outline',

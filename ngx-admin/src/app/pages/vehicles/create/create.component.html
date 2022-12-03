@@ -25,7 +25,7 @@
     </div>
   </div>
   <br>
-  <div class="row" *ngIf="vehicleType == '2'">
+  <div class="row" *ngIf="vehicleType == '2' || updateVehicle.helmet">
     <div class="col-3">
       <label>Helmet number</label>
     </div>
@@ -35,7 +35,7 @@
     </div>
     <br>
   </div>
-  <div class="row" *ngIf="vehicleType == '1'">
+  <div class="row" *ngIf="vehicleType == '1' && !updateVehicle.helmet">
     <div class="col-3">
       <label>Car type</label>
     </div>
