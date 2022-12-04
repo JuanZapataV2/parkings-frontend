@@ -4,6 +4,10 @@ import { CreateComponent } from "./create/create.component";
 import { ListComponent } from './list/list.component';
 import { ShowComponent } from './show/show.component';
 
+
+import { DriverVehiclesComponent } from './driver-vehicles/driver-vehicles.component';
+import { DriverGuard } from '../../guards/driver.guard';
+
 const routes: Routes = [
   {
     path: "create",
@@ -20,6 +24,11 @@ const routes: Routes = [
   {
     path: "show/:id",
     component: ShowComponent,
+  },
+  {
+    path: "getVehicles",
+    component: DriverVehiclesComponent,
+    canActivate:[DriverGuard],
   },
 ];
 

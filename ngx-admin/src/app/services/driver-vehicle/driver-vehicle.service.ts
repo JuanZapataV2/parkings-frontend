@@ -19,6 +19,10 @@ export class DriverVehicleService {
     return this.http.get<DriverVehicle>(`${environment.url_backend}/driver-vehicles/${id}`);
   }
 
+  getDriverVehicles(driver_id: number): Observable<any> {
+    return this.http.get<any>(`${environment.url_backend}/driver-vehicles/getVehicles/${driver_id}`);
+  }
+
   create(driverVehicle:DriverVehicle): any{
     return this.http.post(`${environment.url_backend}/driver-vehicles`, driverVehicle)
 

@@ -9,6 +9,8 @@ import { Car } from '../../../models/cars/car.model';
 import { CarService } from '../../../services/vehicles/cars/car.service';
 import { MotorcycleService } from '../../../services/vehicles/motorcycles/motorcycle.service';
 import { DriverService } from '../../../services/users/drivers/driver.service';
+import { DriverVehicleService } from '../../../services/driver-vehicle/driver-vehicle.service';
+import {DriverVehicle} from '../../../models/driver-vehicle/driver-vehicle.model';
 
 
 @Component({
@@ -54,7 +56,8 @@ export class CreateComponent implements OnInit {
     private bikeSvc: MotorcycleService,
     private activeRoute: ActivatedRoute,
     private router: Router,
-    private securitySvc: SecurityService
+    private securitySvc: SecurityService,
+    private driverVehicleSvc:DriverVehicleService
   ) {}
 
   ngOnInit(): void {
@@ -67,7 +70,13 @@ export class CreateComponent implements OnInit {
     }
     if (this.securitySvc.UserSesionActiva.token != undefined) {
       this.owner_id = this.securitySvc.UserSesionActiva.role.name;
+      let user_id = this.securitySvc.UserSesionActiva.id
+      this.driverSvc.getDriver(user_id).subscribe((data)=>{
+        this.driver_id = data.id
+      });
     }
+
+    
   }
 
   create(): void {
@@ -82,9 +91,15 @@ export class CreateComponent implements OnInit {
           "El vehiculo ha sido creado correctamente",
           "success"
         );
+        let driver_vehicle:any = {
+          "vehicle_id":data.id,
+          "driver_id": this.driver_id,
+        }
+        this.driverVehicleSvc.create(driver_vehicle).subscribe((data) => {
+          console.log("Vehiculo creado");
+        });
         switch (this.vehicleType) {
           case "1":
-            console.log("hago carro");
             this.car.vehicle_id = data.id;
             this.carSvc.create(this.car).subscribe((data) => {
                 Swal.fire(
@@ -95,7 +110,6 @@ export class CreateComponent implements OnInit {
             });
             break;
           case "2":
-            console.log("hago moto");
             this.bike.vehicle_id = data.id;
             this.bikeSvc.create(this.bike).subscribe((data) => {
                 Swal.fire(
@@ -107,6 +121,7 @@ export class CreateComponent implements OnInit {
             break;
         }
         //this.router.navigate(["pages/vehicles/list"]);
+        window.history.back();
       });
     } else {
       Swal.fire(

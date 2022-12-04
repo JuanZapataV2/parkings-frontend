@@ -1,0 +1,26 @@
+<div class="container">
+    <h1>My vehicles</h1>
+    <button class="btn btn-primary" (click)="createVehicle()">Create</button>
+    <table class="table">
+       <thead>
+            <tr>
+                <th *ngFor="let column of columns" scope="col">
+                    {{column}}
+                </th>
+            </tr>
+       </thead>
+       <tbody>
+            <tr *ngFor="let vehicle of vehicles" scope="col">
+                <td>{{vehicle.id}}</td>
+                <td>{{vehicle.license_plate}}</td>
+                <td>
+                    <button class="btn btn-warning" (click)="updateVehicle(vehicle.id)">Edit</button>
+                    <button class="btn btn-danger" (click)="deleteVehicle(vehicle.id)">Delete</button>
+                </td>
+            </tr>
+  
+       </tbody>
+  
+    </table>
+  </div>
+  

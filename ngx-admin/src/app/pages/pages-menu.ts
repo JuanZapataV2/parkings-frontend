@@ -94,6 +94,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
       {
         title: 'List',
         link: '/pages/vehicles/list',
+      },
+      {
+        title: 'My vehicles',
+        link: '/pages/vehicles/getVehicles',
       }
     ],
   },

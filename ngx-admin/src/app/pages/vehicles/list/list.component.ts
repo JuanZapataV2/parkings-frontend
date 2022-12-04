@@ -93,12 +93,6 @@ export class ListComponent implements OnInit {
 
 
   updateVehicle(id:number, isCar: number): void {
-    // Falta implementar :v
-    // console.log("Editando a: ", id);
-    // this.userSvc.destroy(id).subscribe(vehicles =>{
-    //   console.log(vehicles);
-    //   this.vehicles = vehicles;
-    // });
     this.router.navigate([`pages/vehicles/update/${id}`]);
   }
 

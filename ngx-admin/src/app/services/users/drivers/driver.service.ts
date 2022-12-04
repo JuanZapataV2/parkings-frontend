@@ -19,6 +19,10 @@ export class DriverService {
     return this.http.get<Driver>(`${environment.url_backend}/users/drivers/${id}`);
   }
 
+  getDriver(id: number): Observable<any> {
+    return this.http.get<any>(`${environment.url_backend}/users/drivers/getDriver/${id}`);
+  }
+
   create(driver:Driver): any{
     return this.http.post(`${environment.url_backend}/driver`, driver)
 

@@ -19,6 +19,10 @@ export class VehicleService {
     return this.http.get<Vehicle>(`${environment.url_backend}/vehicles/${id}`);
   }
 
+  getByPlate(plate: string): Observable<Vehicle> {
+    return this.http.get<Vehicle>(`${environment.url_backend}/vehicles/plate/${plate}`);
+  }
+
   create(vehicle:Vehicle): any{
     return this.http.post(`${environment.url_backend}/vehicles`, vehicle)
 
