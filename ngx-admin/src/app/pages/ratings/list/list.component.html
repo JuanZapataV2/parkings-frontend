@@ -15,8 +15,8 @@
               <td>{{rating.id}}</td>
               <td>{{rating.comment}}</td>
               <td>{{rating.rating}}</td>
-              <td>{{rating.user_id}}</td>
-              <td>{{rating.parking_id}}</td>
+              <td>{{rating.user.email}}</td>
+              <td>{{rating.parking.name}}</td>
 
               <td>
                   <button class="btn btn-warning" (click)="updateRating(rating.id)">Edit</button>

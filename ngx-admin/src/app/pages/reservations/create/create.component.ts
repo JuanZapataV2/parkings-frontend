@@ -19,6 +19,8 @@ import { DriverService } from "../../../services/users/drivers/driver.service";
 import { Vehicle } from "../../../models/vehicles/vehicle.model";
 import { map } from "rxjs/operators";
 import { DriverVehicleService } from "../../../services/driver-vehicle/driver-vehicle.service";
+import { Parking } from "../../../models/parkings/parking.model";
+import { ParkingService } from "../../../services/parkings/parking.service";
 
 @Component({
   selector: "ngx-create",
@@ -46,35 +48,46 @@ export class CreateComponent implements OnInit {
   state$;
   idVehicleSelected: number;
 
+  idParkingSelected: number;
+
+
   vehicles: Vehicle[] = [];
+  parkings: Parking[] = [];
+  parking: Parking = null;
+
+
+
   constructor(
     private reservationSvc: ReservationService,
     private activeRoute: ActivatedRoute,
     private router: Router,
     private securitySvc: SecurityService,
     private driverSvc: DriverService,
-    private driverVehicleSvc: DriverVehicleService
+    private driverVehicleSvc: DriverVehicleService,
+    private parkingSvc: ParkingService
   ) {}
 
   ngOnInit(): void {
     if (this.activeRoute.snapshot.params.id != -1) {
       this.createMode = false;
       this.reservation_id = this.activeRoute.snapshot.params.id;
-      this.getRating(this.reservation_id);
     } else if (this.activeRoute.snapshot.params.spot_id) {
+      this.getReservation(this.reservation_id);
       this.createMode = true;
       this.spot_id = this.activeRoute.snapshot.params.spot_id;
     } else {
-      this.createMode = true;
+      //this.createMode = true;
     }
     if (this.securitySvc.UserSesionActiva.token != undefined) {
       let user_id = this.securitySvc.UserSesionActiva.id;
-      console.log("el user", user_id);
       this.driverSvc.getDriver(user_id).subscribe((data) => {
-        console.log("Tengo driver", data);
-        this.driver_id = data.id;
+        if(data){
+          this.driver_id = data.id;
+        }
         this.getVehicles();
       });
+      this.getParkings();
+
     }
   }
 
@@ -113,7 +126,7 @@ export class CreateComponent implements OnInit {
     }
   }
 
-  getRating(id: number) {
+  getReservation(id: number) {
     console.log("Buscando reserva", id);
     this.reservationSvc.show(id).subscribe((data) => {
       this.reservation = data;
@@ -145,5 +158,52 @@ export class CreateComponent implements OnInit {
           this.vehicles = data;
         });
     }
+  }
+
+  getParkings() {
+      this.parkingSvc
+        .index()
+        .subscribe((data) => {
+          this.parkings = data;
+          console.log(data)
+        });
+  }
+
+  getParking() {
+    if (this.idParkingSelected){
+    this.parkingSvc
+      .show(this.idParkingSelected)
+      .subscribe((data) => {
+        this.parking = data;
+        console.log(data)
+      });
+    }
+    console.log(this.parking)
+  }
+
+  getHoursDiff(startDate, endDate) {
+    if(!endDate || !startDate){
+      return 0;
+    }
+    const msInHour = 1000 * 60 * 60;
+    startDate = new Date (startDate);
+    endDate = new Date (endDate);
+    return Math.round(Math.abs(endDate - startDate) / msInHour);
+  }
+
+  setPrice(startDate, endDate, vehicleType){
+    if (vehicleType && this.parking){
+      let hours = this.getHoursDiff(startDate, endDate)
+      let price = vehicleType === 1? hours * this.parking.car_hour_price : hours * this.parking.bike_hour_price;
+      return price;
+    }
+    return 0;
+  }
+
+  alert(){
+    Swal.fire(
+      "Prices",
+      "Car:"+this.parking.car_hour_price+" --- "+"Motorcycle:"+this.parking.bike_hour_price,
+    );
   }
 }

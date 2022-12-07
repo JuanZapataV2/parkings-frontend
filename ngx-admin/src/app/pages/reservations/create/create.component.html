@@ -32,8 +32,22 @@
             </option>
         </select>
     </div>
-</div>
+  </div>
 <br>
+
+  <div class="row">
+    <div class="col-3">
+        <label>Parking</label>
+    </div>
+    <div class="col-9">
+        <select class="form-control" [(ngModel)]="idParkingSelected" (ngModelChange)="[getParking(), alert()]">
+            <option *ngFor="let parking of parkings" [value] ="parking.id" selected>
+                {{parking.name}} -- {{parking.address}}
+            </option>
+        </select>
+    </div>
+  </div>
+
 <br>
   <div class="row">
     <div class="col-3">
@@ -43,6 +57,16 @@
       <input type="text" class="form-control" [(ngModel)]="reservation.observations" />
     </div>
   </div>
+  <br>
+  <div class="row">
+    <div class="col-3">
+      <label  title="Price is calculated hour * parkings fee" >Price</label>
+    </div>
+    <div class="col-9">
+      <div class="form-control"> {{setPrice(reservation.start_date,reservation.end_date,1) | currency:'COP'}} </div>
+    </div>
+  </div>
+  <br>
   <div class="row">
     <button *ngIf="createMode" class="btn btn-primary btn-block" (click)="create()">Crear</button>
     <button *ngIf="!createMode" class="btn btn-primary btn-block" (click)="update()">Editar</button>
