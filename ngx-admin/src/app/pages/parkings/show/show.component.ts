@@ -72,6 +72,7 @@ export class ShowComponent implements OnInit {
 
   createReservation(spot_id:number){
     console.log("Reservando lugar", spot_id);
+    this.router.navigate([`pages/reservations/create/new/${spot_id}/${-1}`]);
   }
 
 }

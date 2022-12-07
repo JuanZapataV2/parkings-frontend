@@ -46,7 +46,8 @@ export class HeaderComponent implements OnInit, OnDestroy,OnChanges  {
 
   userMenu = [
     { title: 'Log in', icon: 'fa fa-user', link: "pages/security/login" },
-    { title: 'Log out', icon: 'fa fa-sign-out', link: "pages/security/logout" }];
+    { title: 'Log out', icon: 'fa fa-sign-out', link: "pages/security/logout" }
+  ];
 
     loginMenu= [
       { title: 'Log in', icon: 'fa fa-user', link: "pages/security/login" }];

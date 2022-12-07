@@ -1,0 +1,15 @@
+.reservations-container{
+    display: grid;
+    grid-row: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+.reservation{
+    padding: 10px;
+    display: block;
+    margin: 3px;
+    text-align: center;
+    font-weight: bold;
+    border-radius: 10%;
+    background: #d9dcde;
+}

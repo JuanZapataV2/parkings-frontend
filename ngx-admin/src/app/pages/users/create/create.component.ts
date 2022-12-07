@@ -5,7 +5,13 @@ import { ActivatedRoute, Router } from "@angular/router";
 import Swal from "sweetalert2";
 import { RoleService } from '../../../services/roles/role.service';
 import { Role } from '../../../models/roles/role.model';
+import { SecurityService } from '../../../services/security/security.service';
 
+import { environment } from '../../../../environments/environment';
+import { DriverService } from '../../../services/users/drivers/driver.service';
+import { ParkingOwnerService } from '../../../services/users/parkingOwners/parking-owner.service';
+import { Driver } from '../../../models/drivers/driver.model';
+import { ParkingOwner } from '../../../models/parking-owners/parking-owner.model';
 @Component({
   selector: "ngx-create",
   templateUrl: "./create.component.html",
@@ -17,6 +23,7 @@ export class CreateComponent implements OnInit {
   roles:Role[]=[];
   selectedRole:Role;
   idRoleSelected:number;
+  adminMode:boolean = false;
   user: User = {
     name: "",
     email: "",
@@ -29,7 +36,10 @@ export class CreateComponent implements OnInit {
     private userSvc: UserService,
     private activeRoute: ActivatedRoute,
     private router: Router,
-    private roleSvc:RoleService
+    private roleSvc:RoleService,
+    private securitySvc:SecurityService, 
+    private driverSvc: DriverService, 
+    private parkingOwnerSvc:ParkingOwnerService,
   ) {}
 
   ngOnInit(): void {
@@ -40,6 +50,12 @@ export class CreateComponent implements OnInit {
       this.getUser(this.user_id);
     } else {
       this.createMode = true;
+    }
+
+    if (this.securitySvc.sesionExiste() && this.securitySvc.verificarRolSesion(environment.ADMIN_ID)) {
+      this.adminMode = true;
+    } else {
+      this.adminMode = false;
     }
   }
 
@@ -53,6 +69,20 @@ export class CreateComponent implements OnInit {
           "El usuario ha sido creado correctamente",
           "success"
         );
+        if(this.user.role_id == 3) {
+          let parkingOwner ={
+            "user_id": data.id,
+          }
+          console.log(ParkingOwner);
+          this.parkingOwnerSvc.create(parkingOwner).
+            subscribe((data) => {console.log("Nuevo dueño de parqueadero", data)});
+        } else if(this.user.role_id == 4){
+          let driver:Driver ={
+            "user_id": data.id,
+          }
+          this.driverSvc.create(driver).
+            subscribe((data) => {console.log("Nuevo conductor")});
+        }
         this.router.navigate(["pages/users/list"]);
       });
     } else {
@@ -110,6 +140,10 @@ export class CreateComponent implements OnInit {
   getRoles(){
     this.roleSvc.index().subscribe(roles=>{
       this.roles = roles;
+      if(!this.adminMode){
+        this.roles.splice(0, 2);
+      } 
+      
     });
   }
 }

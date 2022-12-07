@@ -1,1 +1,10 @@
-<p>list works!</p>
+<div class="container">
+    <h1>Reservations</h1>
+    <div class="reservations-container">
+        <div class="reservation" *ngFor="let reservation of reservations">
+            <h7>{{reservation.id}}</h7><br>
+            <a>Spot: {{reservation.parking_spot.code}} </a><br>
+            <!-- <a>Parking :{{ getParkingName(reservation.parking_spot.parking_id)}}</a> -->
+        </div>
+    </div>
+</div>

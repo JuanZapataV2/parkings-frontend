@@ -11,5 +11,6 @@ export class Parking {
   open_hours?: string
   parking_owner: ParkingOwner
   parking_spots: [ParkingSpot]
-
+  bike_hour_price: number
+  car_hour_price: number
 }

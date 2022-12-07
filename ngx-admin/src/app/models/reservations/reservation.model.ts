@@ -6,11 +6,11 @@ export class Reservation {
     driver_id: number
     parking_spot_id: number
     vehicle_id: number
-    price: number
+    price?: number
     start_date: Date
     end_date: Date
     observations: string
     state: number
-    driver: Driver
-    parking_spot: ParkingSpot
+    driver?: Driver
+    parking_spot?: ParkingSpot
 }

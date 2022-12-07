@@ -13,6 +13,7 @@ import { ParkingService } from "../../../services/parkings/parking.service";
 import { SecurityService } from "../../../services/security/security.service";
 import { ParkingSpotService } from "../../../services/parkings/parkingSpot/parking-spot.service";
 import { ParkingSpot } from '../../../models/parking-spots/parking-spot.model';
+import { ParkingOwnerService } from '../../../services/users/parkingOwners/parking-owner.service';
 
 @Component({
   selector: "ngx-create",
@@ -32,6 +33,8 @@ export class CreateComponent implements OnInit {
     open_hours: null,
     parking_owner: null,
     parking_spots: null,
+    bike_hour_price: null,
+    car_hour_price: null
   };
 
   parking_spots: ParkingSpot[] = [];
@@ -67,7 +70,8 @@ export class CreateComponent implements OnInit {
     private router: Router,
     private securitySvc: SecurityService,
     private formBuilder: FormBuilder,
-    private parkingSpotSvc: ParkingSpotService
+    private parkingSpotSvc: ParkingSpotService, 
+    private parkingOwnerSvc: ParkingOwnerService
   ) {
     this.daysForm = this.formBuilder.group({
       day: this.formBuilder.array([], [Validators.required]),
@@ -93,7 +97,10 @@ export class CreateComponent implements OnInit {
       this.createMode = true;
     }
     if (this.securitySvc.UserSesionActiva.token != undefined) {
-      this.parking.owner_id = this.securitySvc.UserSesionActiva.id;
+      let user_id = this.securitySvc.UserSesionActiva.id
+      this.parkingOwnerSvc.getOwner(user_id).subscribe((data)=>{
+        this.parking.owner_id = data.id
+      });
     }
   }
 
@@ -148,7 +155,9 @@ export class CreateComponent implements OnInit {
       this.parking.address == "" ||
       this.parking.number_spaces == null ||
       this.parking.telephone == "" ||
-      this.parking.open_hours == null
+      this.parking.open_hours == null ||
+      this.parking.car_hour_price == null || 
+      this.parking.bike_hour_price == null
     ) {
       return false;
     } else {

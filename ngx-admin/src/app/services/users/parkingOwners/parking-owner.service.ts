@@ -16,11 +16,11 @@ export class ParkingOwnerService {
   }
 
   show(id: string): Observable<ParkingOwner> {
-    return this.http.get<ParkingOwner[]>(`${environment.url_backend}/users/owners/${id}`);
+    return this.http.get<ParkingOwner>(`${environment.url_backend}/users/owners/${id}`);
   }
 
   create(parkingOwner:ParkingOwner): any{
-    return this.http.post(`${environment.url_backend}/parkingOwner`, parkingOwner)
+    return this.http.post(`${environment.url_backend}/users/owners`, parkingOwner)
 
   }
 
@@ -30,6 +30,10 @@ export class ParkingOwnerService {
 
   destroy(id: string) {
     return this.http.delete<ParkingOwner>(`${environment.url_backend}/users/owners/${id}`);
+  }
+
+  getOwner(id: number): Observable<any> {
+    return this.http.get<any>(`${environment.url_backend}/users/owners/getOwner/${id}`);
   }
 
 }

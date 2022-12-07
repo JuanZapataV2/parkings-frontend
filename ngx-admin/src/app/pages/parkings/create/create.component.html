@@ -39,6 +39,24 @@
         </div>
     </div>
     <br>
+    <div class="row">
+        <div class="col-3">
+            <label>Car price (per hour)</label>
+        </div>
+        <div class="col-9">
+            <input type="number" class="form-control" [(ngModel)]="parking.car_hour_price" placeholder="$" />
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-3">
+            <label>Bike price (per hour)</label>
+        </div>
+        <div class="col-9">
+            <input type="number" class="form-control" [(ngModel)]="parking.bike_hour_price" placeholder="$"/>
+        </div>
+    </div>
+    <br>
     <div class="days-hours">
         <label>Opening days</label>
         <p>From:

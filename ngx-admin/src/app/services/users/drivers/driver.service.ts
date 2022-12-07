@@ -24,7 +24,7 @@ export class DriverService {
   }
 
   create(driver:Driver): any{
-    return this.http.post(`${environment.url_backend}/driver`, driver)
+    return this.http.post(`${environment.url_backend}/users/drivers`, driver)
 
   }
 

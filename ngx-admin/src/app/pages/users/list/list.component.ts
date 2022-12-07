@@ -52,12 +52,7 @@ export class ListComponent implements OnInit {
 
 
   updateUser(id:number): void {
-    // Falta implementar :v
-    // console.log("Editando a: ", id);
-    // this.userSvc.destroy(id).subscribe(users =>{
-    //   console.log(users);
-    //   this.users = users;
-    // });
+
     this.router.navigate([`pages/users/update/${id}`]);
   }
 

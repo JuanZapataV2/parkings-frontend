@@ -10,6 +10,10 @@ const routes: Routes = [
     component: CreateComponent,
   },
   {
+    path: "create/new/:spot_id/:id",
+    component: CreateComponent,
+  },
+  {
     path: "list",
     component: ListComponent,
   },
