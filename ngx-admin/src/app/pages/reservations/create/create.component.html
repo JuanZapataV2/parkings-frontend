@@ -1,1 +1,37 @@
-<p>create works!</p>
+<div class="container">
+  <div class="row">
+    <h1 *ngIf="createMode">Create reservation</h1>
+    <h1 *ngIf="!createMode">Edit reservation</h1>
+  </div>
+
+  <!--
+      this.reservation.driver_id == null ||
+      this.reservation.parking_spot_id == null ||
+      this.reservation.vehicle_id == null ||
+      this.reservation.price == null ||
+      this.reservation.driver == null ||
+      this.reservation.parking_spot == null
+   -->
+  <div class="row">
+    <div class="col-3">
+      <label>Start Date</label>
+    </div>
+    <div class="col-9">
+      <input type="datetime" class="form-control" [(ngModel)]="reservation.start_date" />
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-3">
+      <label>End Date</label>
+    </div>
+    <div class="col-9">
+      <input type="datetime" class="form-control" [(ngModel)]="reservation.end_date" />
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <button *ngIf="createMode" class="btn btn-primary btn-block" (click)="create()">Crear</button>
+    <button *ngIf="!createMode" class="btn btn-primary btn-block" (click)="update()">Editar</button>
+  </div>
+</div>

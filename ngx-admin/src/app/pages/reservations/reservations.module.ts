@@ -5,6 +5,8 @@ import { ReservationsRoutingModule } from './reservations-routing.module';
 import { ShowComponent } from './show/show.component';
 import { ListComponent } from './list/list.component';
 import { CreateComponent } from './create/create.component';
+import { FormsModule } from '@angular/forms';
+
 
 
 @NgModule({
@@ -15,7 +17,8 @@ import { CreateComponent } from './create/create.component';
   ],
   imports: [
     CommonModule,
-    ReservationsRoutingModule
+    ReservationsRoutingModule,
+    FormsModule
   ]
 })
 export class ReservationsModule { }

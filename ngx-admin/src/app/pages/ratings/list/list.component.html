@@ -1,1 +1,31 @@
-<p>list works!</p>
+<div class="container">
+  <h1>Ratings</h1>
+  <button class="btn btn-primary" (click)="createRating()">Create</button>
+  <table class="table">
+     <thead>
+          <tr>
+              <th *ngFor="let column of columns" scope="col">
+                  {{column}}
+
+              </th>
+          </tr>
+     </thead>
+     <tbody>
+          <tr *ngFor="let rating of ratings" scope="col">
+              <td>{{rating.id}}</td>
+              <td>{{rating.comment}}</td>
+              <td>{{rating.rating}}</td>
+              <td>{{rating.user_id}}</td>
+              <td>{{rating.parking_id}}</td>
+
+              <td>
+                  <button class="btn btn-warning" (click)="updateRating(rating.id)">Edit</button>
+                  <button class="btn btn-danger" (click)="deleteRating(rating.id)">Delete</button>
+
+              </td>
+          </tr>
+
+     </tbody>
+
+  </table>
+</div>

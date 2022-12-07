@@ -1,1 +1,65 @@
-<p>create works!</p>
+<div class="container">
+  <div class="row">
+    <h1 *ngIf="createMode">Create rating</h1>
+    <h1 *ngIf="!createMode">Edit rating</h1>
+  </div>
+  <div class="row">
+    <div class="col-3">
+      <label>Comment</label>
+    </div>
+    <div class="col-9">
+      <input type="text" class="form-control" [(ngModel)]="rating.comment" />
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-3">
+      <label>Rating</label>
+    </div>
+    <div class="col-9">
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value=1 [(ngModel)]="rating.rating">
+        <label class="form-check-label" for="inlineRadio1">1</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value=2 [(ngModel)]="rating.rating">
+        <label class="form-check-label" for="inlineRadio2">2</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value=3 [(ngModel)]="rating.rating">
+        <label class="form-check-label" for="inlineRadio3">3</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value=4 [(ngModel)]="rating.rating">
+        <label class="form-check-label" for="inlineRadio3">4</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value=5 [(ngModel)]="rating.rating">
+        <label class="form-check-label" for="inlineRadio3">5</label>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-3">
+      <label>Parking</label>
+    </div>
+    <div class="col-9">
+      <input type="number" class="form-control" [(ngModel)]="rating.parking_id" />
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-3">
+      <label>User</label>
+    </div>
+    <div class="col-9">
+      <input  *ngIf="user.role.name === 'admin' " type="number" class="form-control" [(ngModel)]="rating.user_id" />
+      <input  *ngIf="user.role.name != 'admin' " type="number" class="form-control" [(ngModel)]="user.id" disabled/>
+    </div>
+  </div>
+  <div class="row">
+    <button *ngIf="createMode" class="btn btn-primary btn-block" (click)="create()">Crear</button>
+    <button *ngIf="!createMode" class="btn btn-primary btn-block" (click)="update()">Editar</button>
+  </div>
+</div>

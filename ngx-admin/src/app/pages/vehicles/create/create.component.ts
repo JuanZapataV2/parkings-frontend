@@ -76,7 +76,7 @@ export class CreateComponent implements OnInit {
       });
     }
 
-    
+
   }
 
   create(): void {
@@ -156,11 +156,11 @@ export class CreateComponent implements OnInit {
     //   this.vehicle = data;
     // });
     this.carSvc.show(id).subscribe(cars =>{
-      this.car = cars;
+      this.car = cars[0];
     });
 
     this.bikeSvc.show(id).subscribe(bikes =>{
-      this.bike = bikes;
+      this.bike = bikes[0];
     });
   }
 

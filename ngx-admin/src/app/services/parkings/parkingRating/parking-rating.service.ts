@@ -28,7 +28,7 @@ export class ParkingRatingService {
     return this.http.put(`${environment.url_backend}/parkingRating/${parkingRating.id}`, parkingRating)
   }
 
-  destroy(id: string) {
+  destroy(id: number) {
     return this.http.delete<ParkingRating>(`${environment.url_backend}/parkingRating/${id}`);
   }
 

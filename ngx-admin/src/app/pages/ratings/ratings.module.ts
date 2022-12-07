@@ -5,6 +5,8 @@ import { RatingsRoutingModule } from './ratings-routing.module';
 import { CreateComponent } from './create/create.component';
 import { ListComponent } from './list/list.component';
 import { ShowComponent } from './show/show.component';
+import { FormsModule } from '@angular/forms';
+
 
 
 @NgModule({
@@ -15,7 +17,8 @@ import { ShowComponent } from './show/show.component';
   ],
   imports: [
     CommonModule,
-    RatingsRoutingModule
+    RatingsRoutingModule,
+    FormsModule
   ]
 })
 export class RatingsModule { }
