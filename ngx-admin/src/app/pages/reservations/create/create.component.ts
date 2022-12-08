@@ -21,6 +21,7 @@ import { map } from "rxjs/operators";
 import { DriverVehicleService } from "../../../services/driver-vehicle/driver-vehicle.service";
 import { Parking } from "../../../models/parkings/parking.model";
 import { ParkingService } from "../../../services/parkings/parking.service";
+import { ParkingSpotService } from "../../../services/parkings/parkingSpot/parking-spot.service";
 
 @Component({
   selector: "ngx-create",
@@ -41,42 +42,51 @@ export class CreateComponent implements OnInit {
     observations: "",
     state: 0,
   };
+
   sendAttempt: boolean = false;
   user: User;
   driver_id: number;
   spot_id: number;
   state$;
-  idVehicleSelected: number;
+  price: number;
 
+  idVehicleSelected: number;
   idParkingSelected: number;
+  idSpotSelected: number;
+
 
 
   vehicles: Vehicle[] = [];
   parkings: Parking[] = [];
+  spots: ParkingSpot[] = [];
+  spot: ParkingSpot = null;
   parking: Parking = null;
 
 
 
   constructor(
     private reservationSvc: ReservationService,
-    private activeRoute: ActivatedRoute,
+    public activeRoute: ActivatedRoute,
     private router: Router,
     private securitySvc: SecurityService,
     private driverSvc: DriverService,
     private driverVehicleSvc: DriverVehicleService,
-    private parkingSvc: ParkingService
+    private parkingSvc: ParkingService,
+    private spotSvc: ParkingSpotService
   ) {}
 
   ngOnInit(): void {
+    console.log(this.activeRoute.snapshot.params)
     if (this.activeRoute.snapshot.params.id != -1) {
       this.createMode = false;
       this.reservation_id = this.activeRoute.snapshot.params.id;
     } else if (this.activeRoute.snapshot.params.spot_id) {
       this.getReservation(this.reservation_id);
+      this.getParking(this.activeRoute.snapshot.params.parking_id);
       this.createMode = true;
       this.spot_id = this.activeRoute.snapshot.params.spot_id;
     } else {
-      //this.createMode = true;
+      this.createMode = true;
     }
     if (this.securitySvc.UserSesionActiva.token != undefined) {
       let user_id = this.securitySvc.UserSesionActiva.id;
@@ -97,6 +107,9 @@ export class CreateComponent implements OnInit {
     this.reservation.driver_id = this.driver_id;
     this.reservation.parking_spot_id = this.spot_id;
     this.reservation.vehicle_id = this.idVehicleSelected;
+    this.reservation.price = this.price;
+    this.reservation.parking_spot = this.spot;
+
     if (this.validateData()) {
       this.reservationSvc.create(this.reservation).subscribe((data) => {
         Swal.fire(
@@ -112,6 +125,13 @@ export class CreateComponent implements OnInit {
   }
 
   update(): void {
+
+    this.reservation.driver_id = this.driver_id;
+    this.reservation.parking_spot_id = this.spot_id;
+    this.reservation.vehicle_id = this.idVehicleSelected;
+    this.reservation.price = this.price;
+    this.reservation.parking_spot = this.spot;
+
     if (this.validateData()) {
       this.reservationSvc.update(this.reservation).subscribe((data) => {
         Swal.fire(
@@ -141,7 +161,6 @@ export class CreateComponent implements OnInit {
       this.reservation.vehicle_id == null ||
       this.reservation.start_date == null ||
       this.reservation.end_date == null ||
-      this.reservation.driver_id == null ||
       this.reservation.parking_spot_id == null
     ) {
       return false;
@@ -151,11 +170,13 @@ export class CreateComponent implements OnInit {
   }
 
   getVehicles() {
+    console.log(this.driver_id)
     if (this.driver_id) {
       this.driverVehicleSvc
         .getDriverVehicles(this.driver_id)
         .subscribe((data) => {
           this.vehicles = data;
+          console.log(data);
         });
     }
   }
@@ -165,21 +186,52 @@ export class CreateComponent implements OnInit {
         .index()
         .subscribe((data) => {
           this.parkings = data;
-          console.log(data)
+          console.log("parkings",data)
         });
   }
 
-  getParking() {
-    if (this.idParkingSelected){
+  getParking(id?: number) {
+    if(id){
+      console.log("buscando parqueadero", id)
+      this.parkingSvc
+      .show(id)
+      .subscribe((data) => {
+        this.parking = data;
+        this.getSpot();
+      });
+    } else if (this.idParkingSelected){
     this.parkingSvc
       .show(this.idParkingSelected)
       .subscribe((data) => {
         this.parking = data;
-        console.log(data)
+        this.getSpots();
       });
     }
-    console.log(this.parking)
+    console.log("parking",this.parking)
+
   }
+
+  getSpots(){
+    this.spotSvc
+    .getAllSpots(this.parking.id)
+    .subscribe((data) => {
+      this.spots = data;
+      console.log("spots",data)
+
+    });
+  }
+
+    getSpot(){
+      this.spotSvc
+      .show(this.spot_id)
+      .subscribe((data) => {
+        this.spot = data;
+        console.log("spot",data)
+
+      });
+
+
+  };
 
   getHoursDiff(startDate, endDate) {
     if(!endDate || !startDate){
@@ -194,8 +246,8 @@ export class CreateComponent implements OnInit {
   setPrice(startDate, endDate, vehicleType){
     if (vehicleType && this.parking){
       let hours = this.getHoursDiff(startDate, endDate)
-      let price = vehicleType === 1? hours * this.parking.car_hour_price : hours * this.parking.bike_hour_price;
-      return price;
+      this.price = vehicleType === 1? hours * this.parking.car_hour_price : hours * this.parking.bike_hour_price;
+      return this.price;
     }
     return 0;
   }

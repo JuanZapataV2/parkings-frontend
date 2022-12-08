@@ -40,11 +40,31 @@
         <label>Parking</label>
     </div>
     <div class="col-9">
-        <select class="form-control" [(ngModel)]="idParkingSelected" (ngModelChange)="[getParking(), alert()]">
+        <select *ngIf="!activeRoute.snapshot.params.parking_id"  class="form-control" [(ngModel)]="idParkingSelected" (ngModelChange)="[getParking(), alert()]">
             <option *ngFor="let parking of parkings" [value] ="parking.id" selected>
                 {{parking.name}} -- {{parking.address}}
             </option>
         </select>
+        <div class="form-control" *ngIf="activeRoute.snapshot.params.parking_id" > {{parking.name}} </div>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="row">
+    <div class="col-3">
+        <label>Parking Spot</label>
+    </div>
+    <div class="col-9">
+        <select *ngIf="!activeRoute.snapshot.params.spot_id" class="form-control" [(ngModel)]="spot_id">
+          <ng-container *ngFor="let spot of spots">
+            <option  *ngIf="!spot.occupied" [value] ="spot.id" selected>
+              {{spot.code}}
+            </option>
+          </ng-container>
+        </select>
+      <div class="form-control" *ngIf="activeRoute.snapshot.params.spot_id" > {{spot.id}} </div>
+
     </div>
   </div>
 

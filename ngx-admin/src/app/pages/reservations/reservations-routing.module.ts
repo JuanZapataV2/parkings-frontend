@@ -10,7 +10,7 @@ const routes: Routes = [
     component: CreateComponent,
   },
   {
-    path: "create/new/:spot_id/:id",
+    path: "create/new/:id/:parking_id/:spot_id",
     component: CreateComponent,
   },
   {

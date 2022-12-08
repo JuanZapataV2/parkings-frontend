@@ -39,7 +39,7 @@ export class ShowComponent implements OnInit {
       );
       this.router.navigate(["pages/dashboard"]);
     }
-    
+
   }
 
   getParking(id: number) {
@@ -72,7 +72,7 @@ export class ShowComponent implements OnInit {
 
   createReservation(spot_id:number){
     console.log("Reservando lugar", spot_id);
-    this.router.navigate([`pages/reservations/create/new/${spot_id}/${-1}`]);
+    this.router.navigate([`pages/reservations/create/new/${-1}/${this.parking_id}/${spot_id}`]);
   }
 
 }
