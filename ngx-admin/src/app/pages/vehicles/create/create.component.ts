@@ -71,9 +71,11 @@ export class CreateComponent implements OnInit {
     if (this.securitySvc.UserSesionActiva.token != undefined) {
       this.owner_id = this.securitySvc.UserSesionActiva.role.name;
       let user_id = this.securitySvc.UserSesionActiva.id
-      this.driverSvc.getDriver(user_id).subscribe((data)=>{
-        this.driver_id = data.id
-      });
+      if(this.owner_id != "admin"){
+        this.driverSvc.getDriver(user_id).subscribe((data)=>{
+          this.driver_id = data.id
+        });
+      }
     }
 
 

@@ -62,6 +62,9 @@ export class CreateComponent implements OnInit {
   spot: ParkingSpot = null;
   parking: Parking = null;
 
+  user_role: string;
+  user_id: number;
+
 
 
   constructor(
@@ -76,8 +79,10 @@ export class CreateComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log(this.activeRoute.snapshot.params)
-    if (this.activeRoute.snapshot.params.id != -1) {
+    console.log("params",this.activeRoute.snapshot.params)
+    if(this.securitySvc.UserSesionActiva.token != undefined){
+    this.user_role = this.securitySvc.UserSesionActiva.role.name;
+    if (this.activeRoute.snapshot.params.id != -1 && this.activeRoute.snapshot.params.id) {
       this.createMode = false;
       this.reservation_id = this.activeRoute.snapshot.params.id;
     } else if (this.activeRoute.snapshot.params.spot_id) {
@@ -88,15 +93,17 @@ export class CreateComponent implements OnInit {
     } else {
       this.createMode = true;
     }
-    if (this.securitySvc.UserSesionActiva.token != undefined) {
-      let user_id = this.securitySvc.UserSesionActiva.id;
-      this.driverSvc.getDriver(user_id).subscribe((data) => {
+    if (this.user_role != "admin") {
+      this.user_id = this.securitySvc.UserSesionActiva.id;
+      this.driverSvc.getDriver(this.user_id).subscribe((data) => {
         if(data){
           this.driver_id = data.id;
         }
-        this.getVehicles();
+        this.getVehicles(this.driver_id);
       });
-      this.getParkings();
+
+    }
+    this.getParkings();
 
     }
   }
@@ -169,16 +176,13 @@ export class CreateComponent implements OnInit {
     }
   }
 
-  getVehicles() {
-    console.log(this.driver_id)
-    if (this.driver_id) {
+  getVehicles(driver_id) {
+    console.log("bucnado carros de:", driver_id)
       this.driverVehicleSvc
-        .getDriverVehicles(this.driver_id)
+        .getDriverVehicles(driver_id)
         .subscribe((data) => {
           this.vehicles = data;
-          console.log(data);
         });
-    }
   }
 
   getParkings() {
