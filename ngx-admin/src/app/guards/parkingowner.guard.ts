@@ -2,13 +2,12 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { SecurityService } from '../services/security/security.service';
+import { environment } from '../../environments/environment.prod';
 
-import { environment } from '../../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class AdministratorGuard implements CanActivate {
-
+export class ParkingownerGuard implements CanActivate {
   constructor (private securitySvc: SecurityService, private router: Router){
 
   }
@@ -16,10 +15,9 @@ export class AdministratorGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      if (this.securitySvc.sesionExiste() && this.securitySvc.verificarRolSesion(environment.ADMIN_ID)) {
+      if (this.securitySvc.sesionExiste() && this.securitySvc.verificarRolSesion(environment.PARKING_OWNER_ID)) {
         return true
       }  else {
-        this.router.navigate(["pages/security/login"]);
         return false;
       }
   }

@@ -8,7 +8,6 @@ import { UsersModule } from './users/users.module';
 import { ParkingsModule } from './parkings/parkings.module';
 import { RolesModule } from './roles/roles.module';
 import { SecurityModule } from './security/security.module';
-import { AuthenticatorGuard } from '../guards/authenticator.guard';
 
 const routes: Routes = [{
   path: '',
@@ -20,7 +19,6 @@ const routes: Routes = [{
     },
     {
       path: 'users',
-      canActivate:[AuthenticatorGuard],
       loadChildren: () => import('./users/users.module')
         .then(m => m.UsersModule),
     },

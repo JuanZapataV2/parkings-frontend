@@ -1,0 +1,18 @@
+<div class="container">
+    <h1>My reservations</h1>
+    <div class="reservations-container">
+        <div class="reservation" *ngFor="let reservation of reservations">
+            <h7>{{reservation?.id}}</h7><br>
+            <a>Spot: {{reservation?.parking_spot.code}} </a><br>
+            <a class="active" *ngIf="reservation?.state == 1">Active </a>
+            <a class="finished"*ngIf="reservation?.state == 2">Finished </a><br>
+            <a >COP ${{reservation?.price}} </a><br>
+            <a >From {{reservation?.start_date | date :'short'}} </a><br>
+            <a>To {{reservation?.end_date | date :'short'}}</a>
+            <div class="button-group">
+                <a  (click)="showReservation(reservation?.id)" class="res show">Show</a>
+                <a  *ngIf="reservation?.state === 1"  (click)="editReservation(reservation?.id)" class="res update">Edit</a>
+            </div>
+        </div>
+    </div>
+</div>

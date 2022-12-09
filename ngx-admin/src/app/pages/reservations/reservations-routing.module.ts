@@ -3,6 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { CreateComponent } from './create/create.component';
 import { ListComponent } from './list/list.component';
 import { ShowComponent } from './show/show.component';
+import { DriverReservationsComponent } from './driver-reservations/driver-reservations.component';
+import { DriverGuard } from '../../guards/driver.guard';
 
 const routes: Routes = [
   {
@@ -24,6 +26,11 @@ const routes: Routes = [
   {
     path: "show/:id",
     component: ShowComponent,
+  },
+  {
+    path: "myReservations",
+    component: DriverReservationsComponent,
+    canActivate:[DriverGuard],
   },
 ];
 

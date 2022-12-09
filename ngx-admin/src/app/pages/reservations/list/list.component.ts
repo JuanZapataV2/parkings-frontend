@@ -22,7 +22,7 @@ export class ListComponent implements OnInit {
     private securitySvc: SecurityService,
     private driverSvc: DriverService,
     private driverVehicleSvc: DriverVehicleService, 
-    private parkingSvc: ParkingService,
+    private parkingSvc: ParkingService
   ){}
 
   ngOnInit(): void {
@@ -32,7 +32,6 @@ export class ListComponent implements OnInit {
   getReservations(){
     this.reservationSvc.index().subscribe((reservations) => {
       this.reservations = reservations;
-      console.log(this.reservations[0]);
     });
   }
   
@@ -41,4 +40,14 @@ export class ListComponent implements OnInit {
       return parking.name;
     });
   }
+
+  showReservation(reservation_id){
+    this.router.navigate([`pages/reservations/show/${reservation_id}`]);
+  }
+
+  editReservation(reservation_id){
+    this.router.navigate([`pages/reservations/update/${reservation_id}`]);
+  }
+
+  
 }

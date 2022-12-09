@@ -6,6 +6,7 @@ import { ShowComponent } from './show/show.component';
 import { ListComponent } from './list/list.component';
 import { CreateComponent } from './create/create.component';
 import { FormsModule } from '@angular/forms';
+import { DriverReservationsComponent } from './driver-reservations/driver-reservations.component';
 
 
 
@@ -13,7 +14,8 @@ import { FormsModule } from '@angular/forms';
   declarations: [
     ShowComponent,
     ListComponent,
-    CreateComponent
+    CreateComponent,
+    DriverReservationsComponent
   ],
   imports: [
     CommonModule,

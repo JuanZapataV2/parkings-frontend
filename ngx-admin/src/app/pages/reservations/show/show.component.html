@@ -1,1 +1,29 @@
-<p>show works!</p>
+<div class="container">
+  <div class="jumbotron jumbotron-fluid">
+    <a (click)="goBack()" class="btn btn-primary back">Go back</a>
+    <div class="row">
+      <div class="col-md-8">
+        <h1>Reservation {{ reservation?.id }}</h1>
+        <br />
+        <h6><u>Status</u>: <a *ngIf="reservation?.state == 1" class="active">Active</a><a *ngIf="reservation?.state == 2"class="finished">Finished</a></h6>
+        <br />
+        <h6><u>Driver</u>: {{ name }}</h6>
+        <br />
+        <h6><u>Vehicle</u>: {{ vehicle?.license_plate }}</h6>
+        <br />
+        <h6><u>Parking</u>: {{ parking?.name }}</h6>
+        <br />
+        <h6><u>Address</u>: {{ parking?.address }}  |  Parking spot: {{ spot?.code }}</h6>
+        
+        <h6><u>Price: COP${{reservation?.price}} </u></h6>
+          <br />
+          <div>
+            <i>
+                From {{reservation?.start_date | date :'short'}} To {{reservation?.end_date | date :'short'}}
+            </i>
+          </div>
+          <button *ngIf="reservation?.state === 1 && (driver?.user_id === logged_id || parking?.owner_id === logged_id || 1 === logged_id)" class="btn btn-danger" (click)="endReservation(reservation?.id)">Finish</button>
+        </div>
+      </div>
+    </div>
+  </div>

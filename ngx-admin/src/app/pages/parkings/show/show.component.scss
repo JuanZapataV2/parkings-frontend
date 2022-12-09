@@ -38,3 +38,22 @@
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 }
 
+.reviews-container{
+    display: grid;
+    overflow-x: hidden;
+    grid-row: 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+}
+
+.review{
+    padding: 10px;
+    display: block;
+    margin: 3px;
+    text-align: center;
+    font-weight: bold;
+    border-radius: 10%;
+}
+
+.date{
+    font-weight: lighter;
+}

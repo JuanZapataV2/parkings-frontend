@@ -10,6 +10,10 @@ const routes: Routes = [
     component: CreateComponent,
   },
   {
+    path: "create/:id:/:parking_id",
+    component: CreateComponent,
+  },
+  {
     path: "list",
     component: ListComponent,
   },

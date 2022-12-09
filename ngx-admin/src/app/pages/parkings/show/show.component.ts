@@ -6,6 +6,8 @@ import { ParkingService } from "../../../services/parkings/parking.service";
 import { SecurityService } from "../../../services/security/security.service";
 import { ParkingSpotService } from "../../../services/parkings/parkingSpot/parking-spot.service";
 import { ParkingSpot } from "../../../models/parking-spots/parking-spot.model";
+import { ParkingRatingService } from '../../../services/parkings/parkingRating/parking-rating.service';
+import { ParkingRating } from '../../../models/parking-ratings/parking-rating.model';
 
 @Component({
   selector: 'ngx-show',
@@ -17,6 +19,7 @@ export class ShowComponent implements OnInit {
   parking: Parking;
   parking_spots: ParkingSpot[] = [];
   days= [];
+  reviews: ParkingRating[] = [];
   open_hour:Number[] = [];
   end_hour:Number[] = [];
 
@@ -24,7 +27,8 @@ export class ShowComponent implements OnInit {
     private activeRoute: ActivatedRoute,
     private router: Router,
     private securitySvc: SecurityService,
-    private parkingSpotSvc: ParkingSpotService) { }
+    private parkingSpotSvc: ParkingSpotService, 
+    private revsSvc:ParkingRatingService) { }
 
   ngOnInit(): void {
     if (this.activeRoute.snapshot.params.id) {
@@ -39,20 +43,26 @@ export class ShowComponent implements OnInit {
       );
       this.router.navigate(["pages/dashboard"]);
     }
-
   }
 
   getParking(id: number) {
     this.parkingSvc.show(id).subscribe((data) => {
       this.parking = data;
       this.formatSchedule();
+      this.getReviews();
     });
+  }
+
+  getReviews(){
+    this.revsSvc.getParkingReviews(this.parking.id).subscribe((reviews) => {
+      this.reviews = reviews;
+    });
+    
   }
 
   getParkingSpots(id: number) {
     this.parkingSpotSvc.getAllSpots(id).subscribe((data) => {
       this.parking_spots = data;
-      console.log(data);
     });
   }
 
@@ -71,7 +81,6 @@ export class ShowComponent implements OnInit {
   }
 
   createReservation(spot_id:number){
-    console.log("Reservando lugar", spot_id);
     this.router.navigate([`pages/reservations/create/new/${-1}/${this.parking_id}/${spot_id}`]);
   }
 

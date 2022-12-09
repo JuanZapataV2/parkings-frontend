@@ -1,12 +1,8 @@
 import { NbMenuItem } from '@nebular/theme';
+import { AdministratorGuard } from '../guards/administrator.guard';
+import { CanActivate } from '@angular/router';
 
 export const MENU_ITEMS: NbMenuItem[] = [
-  {
-    title: 'E-commerce',
-    icon: 'shopping-cart-outline',
-    link: '/pages/dashboard',
-    home: true,
-  },
   {
     title: 'Users',
     icon: 'user-outline',
@@ -34,6 +30,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
       {
         title: 'List',
         link: '/pages/reservations/list',
+      },
+      {
+        title: 'My reservations',
+        link: '/pages/reservations/myReservations',
       }
     ],
   },
@@ -52,21 +52,6 @@ export const MENU_ITEMS: NbMenuItem[] = [
       }
     ],
   },
-  // {
-  //   title: 'Roles',
-  //   icon: 'user-outline',
-  //   link: '/pages/roles/list',
-  //   children: [
-  //     {
-  //       title: 'Create',
-  //       link: '/pages/roles/create',
-  //     },
-  //     {
-  //       title: 'List',
-  //       link: '/pages/roles/list',
-  //     }
-  //   ],
-  // },
   {
     title: 'Parkings',
     icon: 'user-outline',
@@ -101,66 +86,18 @@ export const MENU_ITEMS: NbMenuItem[] = [
       }
     ],
   },
-  // {
-  //   title: 'Extra Components',
-  //   icon: 'message-circle-outline',
-  //   children: [
-  //     {
-  //       title: 'Calendar',
-  //       link: '/pages/extra-components/calendar',
-  //     },
-  //     {
-  //       title: 'Progress Bar',
-  //       link: '/pages/extra-components/progress-bar',
-  //     },
-  //     {
-  //       title: 'Spinner',
-  //       link: '/pages/extra-components/spinner',
-  //     },
-  //     {
-  //       title: 'Alert',
-  //       link: '/pages/extra-components/alert',
-  //     },
-  //     {
-  //       title: 'Calendar Kit',
-  //       link: '/pages/extra-components/calendar-kit',
-  //     },
-  //     {
-  //       title: 'Chat',
-  //       link: '/pages/extra-components/chat',
-  //     },
-  //   ],
-  // },
-  // {
-  //   title: 'Miscellaneous',
-  //   icon: 'shuffle-2-outline',
-  //   children: [
-  //     {
-  //       title: '404',
-  //       link: '/pages/miscellaneous/404',
-  //     },
-  //   ],
-  // },
   {
     title: 'Auth',
     icon: 'lock-outline',
     children: [
       {
         title: 'Login',
-        link: '/auth/login',
+        link: '/pages/security/login',
       },
       {
         title: 'Register',
-        link: '/auth/register',
-      },
-      {
-        title: 'Request Password',
-        link: '/auth/request-password',
-      },
-      {
-        title: 'Reset Password',
-        link: '/auth/reset-password',
-      },
+        link: '/pages/security/create',
+      }
     ],
   },
 ];

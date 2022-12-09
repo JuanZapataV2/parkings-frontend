@@ -10,6 +10,7 @@ import { SecurityService } from '../../../services/security/security.service';
 import { User } from '../../../models/users/user.model';
 import { LoginComponent } from '../../../pages/security/login/login.component';
 import { Router, NavigationStart } from '@angular/router';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'ngx-header',
@@ -42,6 +43,8 @@ export class HeaderComponent implements OnInit, OnDestroy,OnChanges  {
     },
   ];
 
+  role='Visitor'
+
   currentTheme = 'default';
 
   userMenu = [
@@ -58,13 +61,16 @@ export class HeaderComponent implements OnInit, OnDestroy,OnChanges  {
               private userService: UserService,
               private layoutService: LayoutService,
               private breakpointService: NbMediaBreakpointsService,
-              private SecuritySvc: SecurityService, 
+              private securitySvc: SecurityService, 
               private router: Router) {
   }
 
   ngOnInit() {
-    this.subscription = this.SecuritySvc.getUser().subscribe(user => {
+    this.subscription = this.securitySvc.getUser().subscribe(user => {
       this.user = user;
+      this.getRole();
+      this.setMenu();
+
     });
 
     this.currentTheme = this.themeService.currentTheme;
@@ -83,6 +89,39 @@ export class HeaderComponent implements OnInit, OnDestroy,OnChanges  {
         takeUntil(this.destroy$),
       )
       .subscribe(themeName => this.currentTheme = themeName);
+  }
+
+  getRole(){
+    if (this.securitySvc.sesionExiste()) {
+      if(this.securitySvc.verificarRolSesion(environment.ADMIN_ID)){
+        this.role = 'Admin';
+        return
+      } else if(this.securitySvc.verificarRolSesion(environment.PARKING_OWNER_ID)){
+        this.role = 'Parking owner';
+        return
+      } else if(this.securitySvc.verificarRolSesion(environment.DRIVER_ID)){
+        this.role = 'Driver';
+        return
+      } else {
+        this.role = 'Visitor';
+        return
+      }
+      return 
+    }
+  }
+
+  setMenu(){
+    if (this.securitySvc.sesionExiste()) {
+      this.userMenu = [
+        { title: 'Log out', icon: 'fa fa-sign-out', link: "pages/security/logout" }
+      ];
+    } else {
+      this.userMenu = [
+        { title: 'Log in', icon: 'fa fa-user', link: "pages/security/login" },
+        { title: 'Register', icon: 'fa-user-plus ', link: "pages/users/create" }
+      ];
+    }
+    
   }
 
   ngOnDestroy() {

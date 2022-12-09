@@ -2,10 +2,13 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CreateComponent } from './create/create.component';
 import { ListComponent } from './list/list.component';
+import { AuthenticatorGuard } from '../../guards/authenticator.guard';
+import { AdministratorGuard } from '../../guards/administrator.guard';
 
 const routes: Routes = [
   {
     path: 'list',
+    canActivate:[AdministratorGuard, AuthenticatorGuard],
     component: ListComponent
   },
   {
@@ -14,6 +17,7 @@ const routes: Routes = [
   },
   {
     path:'update/:id',
+    canActivate:[AdministratorGuard, AuthenticatorGuard],
     component: CreateComponent
   }
 ];

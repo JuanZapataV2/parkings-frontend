@@ -40,6 +40,7 @@ export class DriverVehiclesComponent implements OnInit {
     this.cars = [];
     this.bikes = [];
     if (this.securitySvc.UserSesionActiva.token != undefined) {
+      
       let user_id = this.securitySvc.UserSesionActiva.id
       this.driverService.getDriver(user_id).subscribe((data)=>{
         this.driver_id = data.id

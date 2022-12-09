@@ -32,7 +32,21 @@
 
         </div>
         <hr>
+      </div>
+      <div class="container " *ngIf="reviews.length > 0">
+        <h1> User reviews</h1>
+        <div class="reviews-container">
+          <div class="review" *ngFor="let review of reviews">
+            <h6><u>{{review?.rating}}/5</u></h6>
+            <a><i>{{review?.user.name}}: "{{review?.comment}}"</i></a><br>
+            <a class="date">{{review?.created_at | date :'short'}}</a>
+          </div>
+        </div>
 
+      </div>
+      <br>
+      <div class="container" *ngIf="reviews.length == 0">
+        <h1> This parking doesnt have reviews yet.</h1>
       </div>
       <div class="container " *ngIf="parking_spots.length > 0">
         <h1> Parking spots</h1> <br>
@@ -42,7 +56,6 @@
           <a *ngIf="!spot.occupied" (click)="createReservation(spot.id)" class=" parking free">{{spot.code}}</a>
           </div>
         </div>
-
 
       </div>
 

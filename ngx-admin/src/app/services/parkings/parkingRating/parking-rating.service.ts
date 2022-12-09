@@ -32,4 +32,7 @@ export class ParkingRatingService {
     return this.http.delete<ParkingRating>(`${environment.url_backend}/parkingRating/${id}`);
   }
 
+  getParkingReviews(id: number){
+    return this.http.get<ParkingRating[]>(`${environment.url_backend}/parkingRating/parking/${id}`);
+  }
 }

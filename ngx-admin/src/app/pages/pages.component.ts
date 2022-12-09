@@ -10,54 +10,54 @@ import { Router } from '@angular/router';
   styleUrls: ['pages.component.scss'],
   template: `
     <ngx-one-column-layout>
-      <nb-menu [items]="menu"></nb-menu>
+      <nb-menu [items]="menu_items"></nb-menu>
       <router-outlet></router-outlet>
     </ngx-one-column-layout>
   `,
 })
 export class PagesComponent {
 
-  menu = MENU_ITEMS;
+  menu=[];
+  menu_items = MENU_ITEMS;
   subscription: Subscription;
   isLogged:boolean = false;
+  role_id = 0;
   constructor (private securitySvc: SecurityService, private router: Router){
-
   }
 
   ngOnInit(){
     this.subscription = this.securitySvc.getUser().subscribe((data)=>{
-      this.isLogged = true;
-
-      this.updateMenuRole(JSON.parse(this.securitySvc.getDatosSesion()).role.id);
+      if(data.id){
+        this.isLogged = true;
+        this.role_id= data.role.id;
+      } else {
+        this.isLogged = false;
+        this.role_id= 0;
+      }
     });
+    this.updateMenuRole(this.role_id);
   }
   updateMenuRole(id) : void{
-    let nameMenuItems:String[];
+    let nameMenuItems:String[]=[];
     if(this.isLogged){
       if(id==environment.ADMIN_ID){
-        nameMenuItems=["home","menu","user-management","roles-management","categories-management"];
-      }else{
-        nameMenuItems=["home","menu","categories-management"];
+        nameMenuItems=["Users", "Reservations", "Ratings", "Parkings", "Vehicles", "Auth"];
+      }else if (id == environment.PARKING_OWNER_ID){
+        nameMenuItems=["Reservations", "Ratings", "Parkings"];
+      } else if (id == environment.DRIVER_ID){
+        nameMenuItems=["Reservations", "Ratings", "Parkings", "Vehicles"];
+      } else if (id == 0){
+        nameMenuItems=["Auth", "Parkings"]
       }
     }else{
-      nameMenuItems=["home"]
+      nameMenuItems=["Auth", "Parkings"]
     }
 
-    MENU_ITEMS.forEach(actualNameMenuItem => {
-      if(nameMenuItems.indexOf(actualNameMenuItem.title)!=-1){
-        this.menu.push(actualNameMenuItem);
-
-      }
-    });
-  }
-  getItemsMenuRole(menuItems): String[]{
-    let items:String[]=[]
-    if(this.isLogged){
-      menuItems.forEach(itemActual => {
-        items.push(itemActual.url);
-      });
-    }
-
-    return items;
+    // MENU_ITEMS.forEach(actualNameMenuItem => {
+    //   if(nameMenuItems.indexOf(actualNameMenuItem.title)){
+    //     console.log("añado");
+    //     this.menu.push(actualNameMenuItem);
+    //   } 
+    // });
   }
 }

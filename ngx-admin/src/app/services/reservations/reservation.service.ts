@@ -31,4 +31,12 @@ export class ReservationService {
   destroy(id: string) {
     return this.http.delete<Reservation>(`${environment.url_backend}/reservation/${id}`);
   }
+
+  finish(id: string) {
+    return this.http.get<Reservation>(`${environment.url_backend}/reservation/finish/${id}`);
+  }
+
+  getReservations(driver_id){
+    return this.http.get<Reservation[]>(`${environment.url_backend}/reservation/myReservations/${driver_id}`);
+  }
 }

@@ -89,6 +89,8 @@ export class SecurityService {
    this.setUser(JSON.parse(sesionActual));
   }
  }
+
+
  /**
  * Verifica si hay una sesion activa
  * @returns

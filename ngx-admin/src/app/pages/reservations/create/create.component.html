@@ -49,7 +49,7 @@
         <label>Parking</label>
     </div>
     <div class="col-9">
-        <select *ngIf="!activeRoute.snapshot.params.parking_id"  class="form-control" [(ngModel)]="idParkingSelected" (ngModelChange)="[getParking(), alert()]">
+        <select *ngIf="!activeRoute.snapshot.params.parking_id"  class="form-control" [(ngModel)]="idParkingSelected" (ngModelChange)="[getParking()]">
             <option *ngFor="let parking of parkings" [value] ="parking.id" selected>
                 {{parking.name}} -- {{parking.address}}
             </option>

@@ -38,7 +38,6 @@ export class EditSpotComponent implements OnInit {
     else if(this.occupied === "0")
       this.spot.occupied = false;
     if (this.validateData()) {
-      console.log(this.spot);
       this.parkingSpotSvc.update(this.spot).subscribe((data) => {
         Swal.fire(
           "Actualizado",
