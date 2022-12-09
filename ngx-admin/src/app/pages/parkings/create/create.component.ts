@@ -37,6 +37,8 @@ export class CreateComponent implements OnInit {
     car_hour_price: null
   };
 
+  user_role: string;
+
   parking_spots: ParkingSpot[] = [];
   endTime = {
     hour: 0,
@@ -70,7 +72,7 @@ export class CreateComponent implements OnInit {
     private router: Router,
     private securitySvc: SecurityService,
     private formBuilder: FormBuilder,
-    private parkingSpotSvc: ParkingSpotService, 
+    private parkingSpotSvc: ParkingSpotService,
     private parkingOwnerSvc: ParkingOwnerService
   ) {
     this.daysForm = this.formBuilder.group({
@@ -89,6 +91,7 @@ export class CreateComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.user_role = this.securitySvc.UserSesionActiva.role.name;
     if (this.activeRoute.snapshot.params.id) {
       this.createMode = false;
       this.parking_id = this.activeRoute.snapshot.params.id;
@@ -96,20 +99,23 @@ export class CreateComponent implements OnInit {
     } else {
       this.createMode = true;
     }
-    if (this.securitySvc.UserSesionActiva.token != undefined) {
+    if (this.securitySvc.UserSesionActiva.token != undefined && this.user_role != "admin") {
       let user_id = this.securitySvc.UserSesionActiva.id
       this.parkingOwnerSvc.getOwner(user_id).subscribe((data)=>{
         this.parking.owner_id = data.id
       });
     }
+
   }
 
   create(): void {
+    console.log(this.parking.owner_id)
     this.getOpeningHours();
     if (this.validateData()) {
       this.sendAttempt = true;
       this.parkingSvc.create(this.parking).subscribe(async (data) => {
         this.parking.id = data.id;
+        console.log(data)
         let parkingSpotsCreated = await this.createParkingSpots();
         if (parkingSpotsCreated) {
           Swal.fire(
@@ -150,13 +156,20 @@ export class CreateComponent implements OnInit {
 
   validateData(): boolean {
     this.sendAttempt = true;
+    console.log(this.parking.name == "",
+    this.parking.address == "",
+    this.parking.number_spaces == null,
+    this.parking.telephone == "",
+    this.parking.open_hours == null,
+    this.parking.car_hour_price == null,
+    this.parking.bike_hour_price == null)
     if (
       this.parking.name == "" ||
       this.parking.address == "" ||
       this.parking.number_spaces == null ||
       this.parking.telephone == "" ||
       this.parking.open_hours == null ||
-      this.parking.car_hour_price == null || 
+      this.parking.car_hour_price == null ||
       this.parking.bike_hour_price == null
     ) {
       return false;

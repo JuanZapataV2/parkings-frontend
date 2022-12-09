@@ -96,7 +96,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
       },
       {
         title: 'Register',
-        link: '/pages/security/create',
+        link: '/pages/users/create',
       }
     ],
   },

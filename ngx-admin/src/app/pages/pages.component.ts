@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
   styleUrls: ['pages.component.scss'],
   template: `
     <ngx-one-column-layout>
-      <nb-menu [items]="menu_items"></nb-menu>
+      <nb-menu [items]="menu"></nb-menu>
       <router-outlet></router-outlet>
     </ngx-one-column-layout>
   `,
@@ -26,6 +26,7 @@ export class PagesComponent {
   }
 
   ngOnInit(){
+    console.log(this.isLogged, this.role_id)
     this.subscription = this.securitySvc.getUser().subscribe((data)=>{
       if(data.id){
         this.isLogged = true;
@@ -37,6 +38,7 @@ export class PagesComponent {
     });
     this.updateMenuRole(this.role_id);
   }
+
   updateMenuRole(id) : void{
     let nameMenuItems:String[]=[];
     if(this.isLogged){
@@ -53,11 +55,11 @@ export class PagesComponent {
       nameMenuItems=["Auth", "Parkings"]
     }
 
-    // MENU_ITEMS.forEach(actualNameMenuItem => {
-    //   if(nameMenuItems.indexOf(actualNameMenuItem.title)){
-    //     console.log("añado");
-    //     this.menu.push(actualNameMenuItem);
-    //   } 
-    // });
+    MENU_ITEMS.forEach(element => {
+      if(nameMenuItems.indexOf(element.title) > -1){
+        this.menu.push(element);
+      }
+    });
+
   }
 }

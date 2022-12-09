@@ -14,6 +14,14 @@
                 <td>{{parking.id}}</td>
                 <td>{{parking.parking_owner.id}}</td>
                 <td>{{parking.name}}</td>
+                <td>{{parking.address}}</td>
+                <td>{{parking.bike_hour_price}}</td>
+                <td>{{parking.car_hour_price}}</td>
+                <td>{{parking.number_spaces}}</td>
+
+
+
+
                 <td>
                     <button class="btn btn-warning" (click)="updateParking(parking.id)">Edit</button>
                     <button class="btn btn-danger" (click)="deleteParking(parking.id)">Delete</button>

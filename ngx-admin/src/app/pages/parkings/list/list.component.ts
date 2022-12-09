@@ -10,7 +10,7 @@ import { ParkingSpotService } from '../../../services/parkings/parkingSpot/parki
   styleUrls: ["./list.component.scss"],
 })
 export class ListComponent implements OnInit {
-  columns: string[] = ["Id", "Owner", "Name"];
+  columns: string[] = ["Id", "Owner", "Name", "Address", "Bike Price", "Car Price", "Size"];
   parkings: Parking[];
   parking_spots:any[];
   constructor(private parkingSvc: ParkingService, private router: Router, private parkingSpotSvc: ParkingSpotService) {}
@@ -22,6 +22,7 @@ export class ListComponent implements OnInit {
   listParkings(): void {
     this.parkingSvc.index().subscribe((parkings) => {
       this.parkings = parkings;
+      console.log("parkings",parkings)
     });
   }
 
@@ -75,7 +76,7 @@ export class ListComponent implements OnInit {
     this.router.navigate([`pages/parkings/show/${id}`]);
   }
 
-  
+
 }
 
 function delay(ms: number) {

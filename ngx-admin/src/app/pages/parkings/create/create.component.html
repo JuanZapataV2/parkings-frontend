@@ -3,6 +3,15 @@
         <h1 *ngIf="createMode">Create parking</h1>
         <h1 *ngIf="!createMode">Edit parking</h1>
     </div>
+    <div class="row" *ngIf="user_role == 'admin'">
+        <div class="col-3">
+          <label>Usuario</label>
+        </div>
+        <div class="col-9">
+          <input type="number" class="form-control" [(ngModel)]="parking.owner_id" />
+        </div>
+      </div>
+      <br>
     <div class="row">
         <div class="col-3">
             <label>Name</label>
