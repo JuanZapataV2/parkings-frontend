@@ -46,8 +46,7 @@
     </div>
     <div class="col-9">
       <input *ngIf="createMode" type="number" class="form-control" [(ngModel)]="rating.parking_id" />
-      <input *ngIf="!createMode" type="number" class="form-control" [(ngModel)]="rating.parking_id"  disabled/>
-
+      <input *ngIf="!createMode || createFromParking" type="number" class="form-control" [(ngModel)]="rating.parking_id"  disabled/>
     </div>
   </div>
   <br>
