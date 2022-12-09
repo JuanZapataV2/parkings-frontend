@@ -57,7 +57,7 @@ export class PagesComponent {
 
     MENU_ITEMS.forEach(element => {
       if(nameMenuItems.indexOf(element.title) > -1){
-        this.menu.push(element);
+        this.menu.push(element );
       }
     });
 

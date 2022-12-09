@@ -5,6 +5,8 @@ import { ListComponent } from './list/list.component';
 import { ShowComponent } from './show/show.component';
 import { DriverReservationsComponent } from './driver-reservations/driver-reservations.component';
 import { DriverGuard } from '../../guards/driver.guard';
+import { AdministratorGuard } from '../../guards/administrator.guard';
+import { AuthenticatorGuard } from '../../guards/authenticator.guard';
 
 const routes: Routes = [
   {
@@ -18,6 +20,7 @@ const routes: Routes = [
   {
     path: "list",
     component: ListComponent,
+    canActivate:[AdministratorGuard, AuthenticatorGuard],
   },
   {
     path:'update/:id',
