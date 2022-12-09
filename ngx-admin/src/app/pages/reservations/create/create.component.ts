@@ -109,11 +109,12 @@ export class CreateComponent implements OnInit {
   create(): void {
     this.sendAttempt = true;
     this.reservation.state = 1;
-    this.reservation.driver_id = this.driver_id;
+    this.reservation.driver_id = this.user_id;
     this.reservation.parking_spot_id = this.spot_id;
     this.reservation.vehicle_id = this.idVehicleSelected;
     this.reservation.price = this.price;
     this.reservation.parking_spot = this.spot;
+    console.log(this.reservation)
 
     if (this.validateData()) {
       this.reservationSvc.create(this.reservation).subscribe((data) => {
@@ -138,7 +139,7 @@ export class CreateComponent implements OnInit {
   }
 
   update(): void {
-    this.reservation.driver_id = this.driver_id;
+    this.reservation.driver_id = this.user_id;
     this.reservation.parking_spot_id = this.spot_id;
     this.reservation.vehicle_id = this.idVehicleSelected;
     this.reservation.price = this.price;

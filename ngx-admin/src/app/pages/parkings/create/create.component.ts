@@ -156,13 +156,6 @@ export class CreateComponent implements OnInit {
 
   validateData(): boolean {
     this.sendAttempt = true;
-    console.log(this.parking.name == "",
-    this.parking.address == "",
-    this.parking.number_spaces == null,
-    this.parking.telephone == "",
-    this.parking.open_hours == null,
-    this.parking.car_hour_price == null,
-    this.parking.bike_hour_price == null)
     if (
       this.parking.name == "" ||
       this.parking.address == "" ||
